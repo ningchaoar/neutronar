@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="机器学习,学习笔记," />
 
 
 
@@ -79,16 +79,25 @@
 
 
 
-<meta name="description" content="Another Mountain.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="neutronar">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="[TOC] #第一章 ##1.1引言机器学习是这样一门学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。对人来说，经验可以是经历（直接经验）或者知识（间接经验）。对计算机来说，经验往往以数据的形式保存。运用智慧，人可以学习新的经验。在互联网时代，任何人都能比以往更方便的获得更为海量的数据，但是，人的大脑并不擅长于处理海量的数据。由此看来，机器学习的重要作用将越来越明显。作为初学者">
+<meta name="keywords" content="机器学习,学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习第一章笔记">
+<meta property="og:url" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/index.html">
 <meta property="og:site_name" content="neutronar">
-<meta property="og:description" content="Another Mountain.">
+<meta property="og:description" content="[TOC] #第一章 ##1.1引言机器学习是这样一门学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。对人来说，经验可以是经历（直接经验）或者知识（间接经验）。对计算机来说，经验往往以数据的形式保存。运用智慧，人可以学习新的经验。在互联网时代，任何人都能比以往更方便的获得更为海量的数据，但是，人的大脑并不擅长于处理海量的数据。由此看来，机器学习的重要作用将越来越明显。作为初学者">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/二维随机变量期望.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/机器学习式1.1.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/机器学习式1.2.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/交换求和次序.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/均匀分布求和.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/NFL推导结果.png">
+<meta property="og:updated_time" content="2018-05-15T06:23:37.059Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="neutronar">
-<meta name="twitter:description" content="Another Mountain.">
+<meta name="twitter:title" content="机器学习第一章笔记">
+<meta name="twitter:description" content="[TOC] #第一章 ##1.1引言机器学习是这样一门学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。对人来说，经验可以是经历（直接经验）或者知识（间接经验）。对计算机来说，经验往往以数据的形式保存。运用智慧，人可以学习新的经验。在互联网时代，任何人都能比以往更方便的获得更为海量的数据，但是，人的大脑并不擅长于处理海量的数据。由此看来，机器学习的重要作用将越来越明显。作为初学者">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/二维随机变量期望.png">
 
 
 
@@ -118,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/15/机器学习第一章笔记/"/>
 
 
 
 
 
-  <title>neutronar</title>
+  <title>机器学习第一章笔记 | neutronar</title>
   
 
 
@@ -143,8 +152,7 @@
     
   
 
-  <div class="container sidebar-position-right 
-  page-home">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,256 +225,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/This-is-My-first-personal-blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="neutronar">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="neutronar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/15/This-is-My-first-personal-blog/" itemprop="url">This is My first personal blog</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-15T09:36:46+08:00">
-                2018-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/14/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="neutronar">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="neutronar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/14/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-14T11:18:18+08:00">
-                2018-05-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -496,9 +257,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/15/机器学习第一章笔记/" itemprop="url">机器学习第一章笔记</a></h1>
+          <h1 class="post-title" itemprop="name headline">机器学习第一章笔记</h1>
         
 
         <div class="post-meta">
@@ -570,9 +329,7 @@
       
 
       
-        
-          
-            <p>[TOC]</p>
+        <p>[TOC]</p>
 <p>#第一章</p>
 <p>##1.1引言<br>机器学习是这样一门学科，它致力于研究如何通过计算的手段，<strong>利用经验来改善系统自身的性能</strong>。对人来说，经验可以是经历（直接经验）或者知识（间接经验）。对计算机来说，经验往往以数据的形式保存。<br>运用智慧，人可以学习新的经验。在互联网时代，任何人都能比以往更方便的获得更为海量的数据，但是，人的大脑并不擅长于处理海量的数据。由此看来，机器学习的重要作用将越来越明显。<br>作为初学者，我对于“机器学习”、“人工智能”、“神经网络”、“深度学习”等概念，也仅仅是听说过，对于它们的内涵和关系却一头雾水。<br>通过阅读，我初步搞清楚了：人工智能的实现方式之一是机器学习，神经网络是机器学习常用的一种方法，而深度学习可以看做是一种更复杂的神经网络。</p>
 <p>##1.2基本英文词汇<br>阅读英文材料和文献是必须的，因此需要熟悉机器学习领域的专业词汇。<br>数据集（data set）；<strong>示例（instance）</strong>；<strong>样本（sample）</strong>；属性（attribnute）；特征（feature）；值（value）；属性空间（attribute space）；样本空间（sample space）；<strong>特征向量（feature vector）</strong>；维数（dimensionality）；学习（learning）；训练（training）；<strong>训练集（training set）</strong>；<strong>假设（hypothesis）</strong>；学习器（learner）；预测（prediction）；标记（label）；<strong>分类（classification）</strong>；回归（regression）；二分类（binary classification）；多分类（multi-class classification）；聚类（clustering）；<strong>监督学习（supervised learning）</strong>；无监督学习（unsupervised learning）<strong>；泛化（generalization）</strong>；独立同分布（independent and identically distribution）；归纳与演绎（induction and deduction）；<strong>偏差（bias）</strong>；统计学习（statistical learning）；决策树（decision tree）；数据挖掘（data mining ）；迁移学习（transfer learning）；类比学习（learning by analogy）；深度学习（deep learning）；集成学习（ensemble learning）；<strong>支持向量机（Support Vector Machine，SVM）</strong><br>误差（error）；过拟合（overfitting）；欠拟合（underfitting）；采样（sampling）；分层采样（stratified sampling）；留出法（hold-out）；留一法（Leave-One-Out，LOO）；k折交叉验证法（k-fold cross validation）；自助法（bootstrapping）；调参（parameter tuning）；均方误差（mean squared error）；查准率（准确率，precision）；查全率（召回率，recall）；调和平均（harmonic mean）；置信度（confidence）；</p>
@@ -586,8 +343,6 @@
 <p>##1.5发展历程<br>主要介绍了机器学习的各个流派，详略。</p>
 <p>##1.6应用现状<br>略。<br>总结：<br>入门机器学习需要扎实的概率论与数理统计的相关知识。<br>我参考的数理统计教材为以下两本：<br>《概率论与数理统计》高等教育出版社 第四版<br>《数理统计》北京航空航天大学出版社</p>
 
-          
-        
       
     </div>
     
@@ -602,14 +357,38 @@
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/14/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -619,10 +398,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -630,6 +410,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -851,6 +635,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
