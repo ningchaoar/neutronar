@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="第一章1.1引言机器学习是这样一门学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。对人来说，经验可以是经历（直接经验）或者知识（间接经验）。对计算机来说，经验往往以数据的形式保存。">
+<meta name="description" content="这是我阅读周志华老师的著作《机器学习》一书的读书笔记，水平有限，如有错误请各位不吝指教。 第一章1.1引言机器学习是这样一门学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。对人来说，经验可以是经历（直接经验）或者知识（间接经验）。对计算机来说，经验往往以数据的形式保存。">
 <meta name="keywords" content="机器学习,学习笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习第一章笔记">
+<meta property="og:title" content="《机器学习》第一章笔记">
 <meta property="og:url" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/index.html">
 <meta property="og:site_name" content="neutronar">
-<meta property="og:description" content="第一章1.1引言机器学习是这样一门学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。对人来说，经验可以是经历（直接经验）或者知识（间接经验）。对计算机来说，经验往往以数据的形式保存。">
+<meta property="og:description" content="这是我阅读周志华老师的著作《机器学习》一书的读书笔记，水平有限，如有错误请各位不吝指教。 第一章1.1引言机器学习是这样一门学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。对人来说，经验可以是经历（直接经验）或者知识（间接经验）。对计算机来说，经验往往以数据的形式保存。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/二维随机变量期望.png">
 <meta property="og:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/机器学习式1.1.png">
@@ -93,10 +93,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/交换求和次序.png">
 <meta property="og:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/均匀分布求和.png">
 <meta property="og:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/NFL推导结果.png">
-<meta property="og:updated_time" content="2018-05-15T06:46:11.056Z">
+<meta property="og:updated_time" content="2018-05-16T01:23:18.556Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习第一章笔记">
-<meta name="twitter:description" content="第一章1.1引言机器学习是这样一门学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。对人来说，经验可以是经历（直接经验）或者知识（间接经验）。对计算机来说，经验往往以数据的形式保存。">
+<meta name="twitter:title" content="《机器学习》第一章笔记">
+<meta name="twitter:description" content="这是我阅读周志华老师的著作《机器学习》一书的读书笔记，水平有限，如有错误请各位不吝指教。 第一章1.1引言机器学习是这样一门学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。对人来说，经验可以是经历（直接经验）或者知识（间接经验）。对计算机来说，经验往往以数据的形式保存。">
 <meta name="twitter:image" content="http://yoursite.com/2018/03/15/机器学习第一章笔记/二维随机变量期望.png">
 
 
@@ -133,7 +133,7 @@
 
 
 
-  <title>机器学习第一章笔记 | neutronar</title>
+  <title>《机器学习》第一章笔记 | neutronar</title>
   
 
 
@@ -277,7 +277,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">机器学习第一章笔记</h1>
+          <h1 class="post-title" itemprop="name headline">《机器学习》第一章笔记</h1>
         
 
         <div class="post-meta">
@@ -349,7 +349,8 @@
       
 
       
-        <h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="1-1引言"><a href="#1-1引言" class="headerlink" title="1.1引言"></a>1.1引言</h2><p>机器学习是这样一门学科，它致力于研究如何通过计算的手段，<strong>利用经验来改善系统自身的性能</strong>。对人来说，经验可以是经历（直接经验）或者知识（间接经验）。对计算机来说，经验往往以数据的形式保存。<br><a id="more"></a><br>运用智慧，人可以学习新的经验。在互联网时代，任何人都能比以往更方便的获得更为海量的数据，但是，人的大脑并不擅长于处理海量的数据。由此看来，机器学习的重要作用将越来越明显。<br>作为初学者，我对于“机器学习”、“人工智能”、“神经网络”、“深度学习”等概念，也仅仅是听说过，对于它们的内涵和关系却一头雾水。<br>通过阅读，我初步搞清楚了：人工智能的实现方式之一是机器学习，神经网络是机器学习常用的一种方法，而深度学习可以看做是一种更复杂的神经网络。</p>
+        <p>这是我阅读周志华老师的著作《机器学习》一书的读书笔记，水平有限，如有错误请各位不吝指教。</p>
+<h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="1-1引言"><a href="#1-1引言" class="headerlink" title="1.1引言"></a>1.1引言</h2><p>机器学习是这样一门学科，它致力于研究如何通过计算的手段，<strong>利用经验来改善系统自身的性能</strong>。对人来说，经验可以是经历（直接经验）或者知识（间接经验）。对计算机来说，经验往往以数据的形式保存。<br><a id="more"></a><br>运用智慧，人可以学习新的经验。在互联网时代，任何人都能比以往更方便的获得更为海量的数据，但是，人的大脑并不擅长于处理数据。由此看来，机器学习的重要作用将越来越明显。<br>作为初学者，我对于“机器学习”、“人工智能”、“神经网络”、“深度学习”等概念，也仅仅是听说过，对于它们的内涵和关系却一头雾水。<br>通过阅读，我初步搞清楚了：人工智能的实现方式之一是机器学习，神经网络是机器学习常用的一种方法，而深度学习可以看做是一种更复杂的神经网络。</p>
 <h2 id="1-2基本英文词汇"><a href="#1-2基本英文词汇" class="headerlink" title="1.2基本英文词汇"></a>1.2基本英文词汇</h2><p>阅读英文材料和文献是必须的，因此需要熟悉机器学习领域的专业词汇。<br>数据集（data set）；<strong>示例（instance）</strong>；<strong>样本（sample）</strong>；属性（attribnute）；特征（feature）；值（value）；属性空间（attribute space）；样本空间（sample space）；<strong>特征向量（feature vector）</strong>；维数（dimensionality）；学习（learning）；训练（training）；<strong>训练集（training set）</strong>；<strong>假设（hypothesis）</strong>；学习器（learner）；预测（prediction）；标记（label）；<strong>分类（classification）</strong>；回归（regression）；二分类（binary classification）；多分类（multi-class classification）；聚类（clustering）；<strong>监督学习（supervised learning）</strong>；无监督学习（unsupervised learning）<strong>；泛化（generalization）</strong>；独立同分布（independent and identically distribution）；归纳与演绎（induction and deduction）；<strong>偏差（bias）</strong>；统计学习（statistical learning）；决策树（decision tree）；数据挖掘（data mining ）；迁移学习（transfer learning）；类比学习（learning by analogy）；深度学习（deep learning）；集成学习（ensemble learning）；<strong>支持向量机（Support Vector Machine，SVM）</strong><br>误差（error）；过拟合（overfitting）；欠拟合（underfitting）；采样（sampling）；分层采样（stratified sampling）；留出法（hold-out）；留一法（Leave-One-Out，LOO）；k折交叉验证法（k-fold cross validation）；自助法（bootstrapping）；调参（parameter tuning）；均方误差（mean squared error）；查准率（准确率，precision）；查全率（召回率，recall）；调和平均（harmonic mean）；置信度（confidence）；</p>
 <p>学习的过程就是不断地把上面的生僻的词汇转化为熟悉的知识，并加以运用。</p>
 <h2 id="1-3假设空间"><a href="#1-3假设空间" class="headerlink" title="1.3假设空间"></a>1.3假设空间</h2><p>以人获得经验的方式为例，首先，一个事物本身的规律是客观的，在最初的观察中，我们虽不能一下子正确地掌握这个规律，但可以把所有的假设先放在一起（假设空间），通过学习总结，逐渐地筛选，进而找出最符合事实的假设。<br>机器学习也是这样一个过程：对于一个用于训练的数据集来说，也存在许多用来描述这个数据集内在规律的假设，在所有假设组成的空间中，采用某种算法对进行搜索，进而找到与训练集相匹配的假设。<br>P5：版本空间，就是说，在假设空间中可能存在不止一种假设可以与训练集相符（显然训练集越小，越难以对假设进行剔除），这些假设的集合成为版本空间。版本空间中的每一个假设都可以描述这个数据集，因此选择哪一种假设就涉及到归纳偏好问题了。</p>
@@ -388,6 +389,22 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/16/机器学习第二章笔记/" rel="prev" title="《机器学习》第二章笔记">
+                《机器学习》第二章笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -465,7 +482,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
