@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/梯度.png">
 <meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/SGD.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/对偶算法.png">
-<meta property="og:updated_time" content="2018-05-16T07:36:43.632Z">
+<meta property="og:updated_time" content="2018-05-16T08:57:05.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《统计学习方法》第二章笔记">
 <meta name="twitter:description" content="第二章 感知机感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。">
@@ -106,7 +106,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Muse',
     version: '5.1.4',
     sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -356,7 +356,9 @@
 <h2 id="感知机学习算法"><a href="#感知机学习算法" class="headerlink" title="感知机学习算法"></a>感知机学习算法</h2><p>既然已经得到式2.4，现在问题就转化为找到一个能使之最小化的$S$，本节介绍了一种算法——随机梯度下降法（stochastic gradient descent，SGD）。<br>首先，随机生成一个超平面，这个超平面的误差肯定很大。我们可以每次让这个平面移动一点点，从而让误差减小一点点，直至误差极小化。那么问题就来了，怎么移动这一点点呢？<br>我们来看梯度的定义：<br><img src="/2018/03/20/统计学习方法第二章笔记/./梯度.png" alt="Alt text"><br>也就是说，一个函数在某处的梯度方向，就是该函数值升高最快的方向，于是我们可以求出损失函数的梯度，每次都沿着梯度的负方向移动，直至损失函数最小化。<br>具体做法如下：<br><img src="/2018/03/20/统计学习方法第二章笔记/./SGD.jpg" alt="Alt text"><br>$η(0&lt;η≤1)$为步长（有时也称为学习率），显然步长将影响算法的收敛性，收敛速度和精度，需要加以权衡。</p>
 <h3 id="SGD算法的收敛性："><a href="#SGD算法的收敛性：" class="headerlink" title="SGD算法的收敛性："></a>SGD算法的收敛性：</h3><p>直观上，SGD算法就是在寻找极小值，当函数只存在一个极小值时，这个极小值就是最小值，该算法最终可以收敛于此。但还有这样的情况，函数不只有一个极小值点，当该算法达到一个局域极小值的时候，由于步长有限，算法将被困在局域极小值。这并没有达到我们的要求。</p>
 <p>当数据集是线性可分的时候，SGD算法能否避免上述问题呢?<br>答案是肯定的，SGD不仅可以完美解决线性可分数据集的分类问题，还能保证在有限的步骤内解决这个问题。证明见书P31。</p>
-<h3 id="感知机学习算法的对偶形式："><a href="#感知机学习算法的对偶形式：" class="headerlink" title="感知机学习算法的对偶形式："></a>感知机学习算法的对偶形式：</h3><p>SGD算法的更一般的形式，将超平面系数$\omega$和$b$表示为样本数据中实例$x_i$和标记$y_i$的线性组合，通过求解其系数进而求得$\omega$和$b$。<br><img src="/2018/03/20/统计学习方法第二章笔记/./对偶算法.png" alt="Alt text"><br>将$\omega$和$b$代入得到对偶算法的感知机模型：<br>$$f(x)=sign(\sum_{j=1}^{N}\alpha_j y_j x_j \cdot x + b )$$<br>可见，在求解的过程中，需要反复的计算$x_i$和$x_j$的乘积，为了方便，可以预先将训练集中实例间的内积计算出来并保存在矩阵中，即Gram矩阵。<br>\begin{equation}\nonumber  %nonumber表示不显示公式编号<br>\left(<br>  \begin{array}{ccc}<br>    x_{1} \cdot x_{1} &amp; x_{1}\cdot x_{2} &amp;  …\<br>   x_{2} \cdot x_{1} &amp; x_{2}\cdot x_{2}  &amp;…\<br>   …&amp;…&amp;… \<br>  x_{N} \cdot x_{1} &amp; x_{N}\cdot x_{2}  &amp;…\<br>  \end{array}<br>\right) _{N\times N}<br>\end{equation}</p>
+<h3 id="感知机学习算法的对偶形式："><a href="#感知机学习算法的对偶形式：" class="headerlink" title="感知机学习算法的对偶形式："></a>感知机学习算法的对偶形式：</h3><p>SGD算法的更一般的形式，将超平面系数$\omega$和$b$表示为样本数据中实例$x_i$和标记$y_i$的线性组合，通过求解其系数进而求得$\omega$和$b$。<br><img src="/2018/03/20/统计学习方法第二章笔记/./对偶算法.png" alt="Alt text"><br>将$\omega$和$b$代入得到对偶算法的感知机模型：</p>
+<script type="math/tex; mode=display">f(x)=sign(\sum_{j=1}^{N}\alpha_j y_j x_j \cdot x + b )</script><p>可见，在求解的过程中，需要反复的计算$x_i$和$x_j$的乘积，为了方便，可以预先将训练集中实例间的内积计算出来并保存在矩阵中，即Gram矩阵。</p>
+<p>\begin{equation}<br>\left(<br>  \begin{array}{ccc}<br>    x_{1} \cdot x_{1} &amp; x_{1}\cdot x_{2} &amp;  …\\<br>   x_{2} \cdot x_{1} &amp; x_{2}\cdot x_{2}  &amp;…\\<br>   …&amp;…&amp;… \\<br>  x_{N} \cdot x_{1} &amp; x_{N}\cdot x_{2}  &amp;…\\<br>  \end{array}<br>\right) _{N\times N}<br>\end{equation}</p>
 
       
     </div>
@@ -571,7 +573,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -671,13 +673,6 @@
   
   
 
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
@@ -687,24 +682,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -757,6 +735,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
 
   
 
