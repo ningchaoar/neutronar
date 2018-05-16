@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记,统计学习方法," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="第二章 感知机感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。">
+<meta name="keywords" content="学习笔记,统计学习方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《统计学习方法》第二章笔记">
+<meta property="og:url" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/index.html">
+<meta property="og:site_name" content="neutronar">
+<meta property="og:description" content="第二章 感知机感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机定义.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机几何图.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/损失函数.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/不考虑.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/梯度.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/SGD.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/对偶算法.png">
+<meta property="og:updated_time" content="2018-05-16T07:36:43.632Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《统计学习方法》第二章笔记">
+<meta name="twitter:description" content="第二章 感知机感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机定义.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/"/>
+
+
+
+
+
+  <title>《统计学习方法》第二章笔记 | neutronar</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">neutronar</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个普通学生的学习笔记</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="neutronar">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/mountain.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="neutronar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《统计学习方法》第二章笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-20T00:00:00+08:00">
+                2018-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第二章-感知机"><a href="#第二章-感知机" class="headerlink" title="第二章 感知机"></a>第二章 感知机</h1><p>感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。<br><a id="more"></a></p>
+<h2 id="感知机模型"><a href="#感知机模型" class="headerlink" title="感知机模型"></a>感知机模型</h2><p><img src="/2018/03/20/统计学习方法第二章笔记/./感知机定义.jpg" alt="Alt text"><br>感知机的几何解释：在样本空间找到一个超平面$S$，在此超平面一侧的样本将被标记为正类，而另一侧的样本被标记为负类。<br><img src="/2018/03/20/统计学习方法第二章笔记/./感知机几何图.jpg" alt="Alt text"><br>有了这样一个模型，还必须解答两个问题：①数据集要满足什么条件，才存在这样的超平面$S$。②如果超平面$S$存在，怎么找出它。</p>
+<h2 id="感知机学习策略"><a href="#感知机学习策略" class="headerlink" title="感知机学习策略"></a>感知机学习策略</h2><p>①的答案是：训练数据集必须是线性可分的。这篇文章总结的很好，详见：<a href="https://blog.csdn.net/u013300875/article/details/44081067" target="_blank" rel="noopener">如何（高效）判断数据是否线性可分 by iouiwc。</a><br>②的答案是：如果一个超平面$S$的（经验）损失函数最小，那么这就是我们要找的超平面$S$。在这里，损失函数可以是误分类点到超平面$S$的距离之和：<br><img src="/2018/03/20/统计学习方法第二章笔记/./损失函数.jpg" alt="Alt text"><br>有人问下图中，为什么书上这里不考虑分母$||w||$呢？<br><img src="/2018/03/20/统计学习方法第二章笔记/./不考虑.jpg" alt="Alt text"><br>答案是，这个损失函数是定义在误分类点集合M上的函数，当所有的点都被正确分类以后，$M$为空，即没有误分类点了，这个函数自然达到最小值0。所以最小化损失函数其实就是在找这个函数等于0时的解。<br>换句话说，感知机只关心找到的超平面是否把两类样本一个不漏地划分开了，而不考虑该超平面是否是最好的那个。（如果考虑间隔最大的最优超平面，那就发展成为第七章所讲的“支持向量机”）</p>
+<h2 id="感知机学习算法"><a href="#感知机学习算法" class="headerlink" title="感知机学习算法"></a>感知机学习算法</h2><p>既然已经得到式2.4，现在问题就转化为找到一个能使之最小化的$S$，本节介绍了一种算法——随机梯度下降法（stochastic gradient descent，SGD）。<br>首先，随机生成一个超平面，这个超平面的误差肯定很大。我们可以每次让这个平面移动一点点，从而让误差减小一点点，直至误差极小化。那么问题就来了，怎么移动这一点点呢？<br>我们来看梯度的定义：<br><img src="/2018/03/20/统计学习方法第二章笔记/./梯度.png" alt="Alt text"><br>也就是说，一个函数在某处的梯度方向，就是该函数值升高最快的方向，于是我们可以求出损失函数的梯度，每次都沿着梯度的负方向移动，直至损失函数最小化。<br>具体做法如下：<br><img src="/2018/03/20/统计学习方法第二章笔记/./SGD.jpg" alt="Alt text"><br>$η(0&lt;η≤1)$为步长（有时也称为学习率），显然步长将影响算法的收敛性，收敛速度和精度，需要加以权衡。</p>
+<h3 id="SGD算法的收敛性："><a href="#SGD算法的收敛性：" class="headerlink" title="SGD算法的收敛性："></a>SGD算法的收敛性：</h3><p>直观上，SGD算法就是在寻找极小值，当函数只存在一个极小值时，这个极小值就是最小值，该算法最终可以收敛于此。但还有这样的情况，函数不只有一个极小值点，当该算法达到一个局域极小值的时候，由于步长有限，算法将被困在局域极小值。这并没有达到我们的要求。</p>
+<p>当数据集是线性可分的时候，SGD算法能否避免上述问题呢?<br>答案是肯定的，SGD不仅可以完美解决线性可分数据集的分类问题，还能保证在有限的步骤内解决这个问题。证明见书P31。</p>
+<h3 id="感知机学习算法的对偶形式："><a href="#感知机学习算法的对偶形式：" class="headerlink" title="感知机学习算法的对偶形式："></a>感知机学习算法的对偶形式：</h3><p>SGD算法的更一般的形式，将超平面系数$\omega$和$b$表示为样本数据中实例$x_i$和标记$y_i$的线性组合，通过求解其系数进而求得$\omega$和$b$。<br><img src="/2018/03/20/统计学习方法第二章笔记/./对偶算法.png" alt="Alt text"><br>将$\omega$和$b$代入得到对偶算法的感知机模型：<br>$$f(x)=sign(\sum_{j=1}^{N}\alpha_j y_j x_j \cdot x + b )$$<br>可见，在求解的过程中，需要反复的计算$x_i$和$x_j$的乘积，为了方便，可以预先将训练集中实例间的内积计算出来并保存在矩阵中，即Gram矩阵。<br>\begin{equation}\nonumber  %nonumber表示不显示公式编号<br>\left(<br>  \begin{array}{ccc}<br>    x_{1} \cdot x_{1} &amp; x_{1}\cdot x_{2} &amp;  …\<br>   x_{2} \cdot x_{1} &amp; x_{2}\cdot x_{2}  &amp;…\<br>   …&amp;…&amp;… \<br>  x_{N} \cdot x_{1} &amp; x_{N}\cdot x_{2}  &amp;…\<br>  \end{array}<br>\right) _{N\times N}<br>\end{equation}</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/统计学习方法/" rel="tag"># 统计学习方法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/19/统计学习方法第一章笔记/" rel="next" title="《统计学习方法》第一章笔记">
+                <i class="fa fa-chevron-left"></i> 《统计学习方法》第一章笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/mountain.jpg"
+                alt="neutronar" />
+            
+              <p class="site-author-name" itemprop="name">neutronar</p>
+              <p class="site-description motion-element" itemprop="description">Another Mountain.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-感知机"><span class="nav-number">1.</span> <span class="nav-text">第二章 感知机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机模型"><span class="nav-number">1.1.</span> <span class="nav-text">感知机模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机学习策略"><span class="nav-number">1.2.</span> <span class="nav-text">感知机学习策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机学习算法"><span class="nav-number">1.3.</span> <span class="nav-text">感知机学习算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SGD算法的收敛性："><span class="nav-number">1.3.1.</span> <span class="nav-text">SGD算法的收敛性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机学习算法的对偶形式："><span class="nav-number">1.3.2.</span> <span class="nav-text">感知机学习算法的对偶形式：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">neutronar</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
