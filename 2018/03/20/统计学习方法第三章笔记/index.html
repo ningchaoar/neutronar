@@ -79,26 +79,23 @@
 
 
 
-<meta name="description" content="第二章 感知机感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。">
+<meta name="description" content="第三章 k近邻法k近邻法（k-nearest neighbor，k-NN）是一种常用的分类及回归方法。k近邻法利用训练集对特征向量空间进行划分，并作为其分类的“模型”。k值的选择，距离度量及分类决策规则是k近邻法的三个基本要素。k近邻法的一个实现方法是——kd树。 k近邻算法注意（1）中k的值是确定的，因此对于不同的样本$x$，其邻域半径也是不同的。（2）中式3.1表示了将$x$的类别判断为邻域中">
 <meta name="keywords" content="学习笔记,统计学习方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《统计学习方法》第二章笔记">
-<meta property="og:url" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/index.html">
 <meta property="og:site_name" content="neutronar">
-<meta property="og:description" content="第二章 感知机感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。">
+<meta property="og:description" content="第三章 k近邻法k近邻法（k-nearest neighbor，k-NN）是一种常用的分类及回归方法。k近邻法利用训练集对特征向量空间进行划分，并作为其分类的“模型”。k值的选择，距离度量及分类决策规则是k近邻法的三个基本要素。k近邻法的一个实现方法是——kd树。 k近邻算法注意（1）中k的值是确定的，因此对于不同的样本$x$，其邻域半径也是不同的。（2）中式3.1表示了将$x$的类别判断为邻域中">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机定义.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机几何图.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/损失函数.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/不考虑.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/梯度.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/SGD.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/对偶算法.png">
-<meta property="og:updated_time" content="2018-05-16T08:57:05.857Z">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/算法.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/Lp距离.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/图3.3.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/图3.4.jpg">
+<meta property="og:updated_time" content="2018-05-17T02:24:08.951Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《统计学习方法》第二章笔记">
-<meta name="twitter:description" content="第二章 感知机感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机定义.jpg">
+<meta name="twitter:description" content="第三章 k近邻法k近邻法（k-nearest neighbor，k-NN）是一种常用的分类及回归方法。k近邻法利用训练集对特征向量空间进行划分，并作为其分类的“模型”。k值的选择，距离度量及分类决策规则是k近邻法的三个基本要素。k近邻法的一个实现方法是——kd树。 k近邻算法注意（1）中k的值是确定的，因此对于不同的样本$x$，其邻域半径也是不同的。（2）中式3.1表示了将$x$的类别判断为邻域中">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/算法.jpg">
 
 
 
@@ -128,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/"/>
 
 
 
@@ -261,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="neutronar">
@@ -350,15 +347,14 @@
       
 
       
-        <h1 id="第二章-感知机"><a href="#第二章-感知机" class="headerlink" title="第二章 感知机"></a>第二章 感知机</h1><p>感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。<br><a id="more"></a></p>
-<h2 id="感知机模型"><a href="#感知机模型" class="headerlink" title="感知机模型"></a>感知机模型</h2><p><img src="/2018/03/20/统计学习方法第二章笔记/./感知机定义.jpg" alt="Alt text"><br>感知机的几何解释：在样本空间找到一个超平面$S$，在此超平面一侧的样本将被标记为正类，而另一侧的样本被标记为负类。<br><img src="/2018/03/20/统计学习方法第二章笔记/./感知机几何图.jpg" alt="Alt text"><br>有了这样一个模型，还必须解答两个问题：①数据集要满足什么条件，才存在这样的超平面$S$。②如果超平面$S$存在，怎么找出它。</p>
-<h2 id="感知机学习策略"><a href="#感知机学习策略" class="headerlink" title="感知机学习策略"></a>感知机学习策略</h2><p>①的答案是：训练数据集必须是线性可分的。这篇文章总结的很好，详见：<a href="https://blog.csdn.net/u013300875/article/details/44081067" target="_blank" rel="noopener">如何（高效）判断数据是否线性可分 by iouiwc。</a><br>②的答案是：如果一个超平面$S$的（经验）损失函数最小，那么这就是我们要找的超平面$S$。在这里，损失函数可以是误分类点到超平面$S$的距离之和：<br><img src="/2018/03/20/统计学习方法第二章笔记/./损失函数.jpg" alt="Alt text"><br>有人问下图中，为什么书上这里不考虑分母$||w||$呢？<br><img src="/2018/03/20/统计学习方法第二章笔记/./不考虑.jpg" alt="Alt text"><br>答案是，这个损失函数是定义在误分类点集合M上的函数，当所有的点都被正确分类以后，$M$为空，即没有误分类点了，这个函数自然达到最小值0。所以最小化损失函数其实就是在找这个函数等于0时的解。<br>换句话说，感知机只关心找到的超平面是否把两类样本一个不漏地划分开了，而不考虑该超平面是否是最好的那个。（如果考虑间隔最大的最优超平面，那就发展成为第七章所讲的“支持向量机”）</p>
-<h2 id="感知机学习算法"><a href="#感知机学习算法" class="headerlink" title="感知机学习算法"></a>感知机学习算法</h2><p>既然已经得到式2.4，现在问题就转化为找到一个能使之最小化的$S$，本节介绍了一种算法——随机梯度下降法（stochastic gradient descent，SGD）。<br>首先，随机生成一个超平面，这个超平面的误差肯定很大。我们可以每次让这个平面移动一点点，从而让误差减小一点点，直至误差极小化。那么问题就来了，怎么移动这一点点呢？<br>我们来看梯度的定义：<br><img src="/2018/03/20/统计学习方法第二章笔记/./梯度.png" alt="Alt text"><br>也就是说，一个函数在某处的梯度方向，就是该函数值升高最快的方向，于是我们可以求出损失函数的梯度，每次都沿着梯度的负方向移动，直至损失函数最小化。<br>具体做法如下：<br><img src="/2018/03/20/统计学习方法第二章笔记/./SGD.jpg" alt="Alt text"><br>$η(0&lt;η≤1)$为步长（有时也称为学习率），显然步长将影响算法的收敛性，收敛速度和精度，需要加以权衡。</p>
-<h3 id="SGD算法的收敛性："><a href="#SGD算法的收敛性：" class="headerlink" title="SGD算法的收敛性："></a>SGD算法的收敛性：</h3><p>直观上，SGD算法就是在寻找极小值，当函数只存在一个极小值时，这个极小值就是最小值，该算法最终可以收敛于此。但还有这样的情况，函数不只有一个极小值点，当该算法达到一个局域极小值的时候，由于步长有限，算法将被困在局域极小值。这并没有达到我们的要求。</p>
-<p>当数据集是线性可分的时候，SGD算法能否避免上述问题呢?<br>答案是肯定的，SGD不仅可以完美解决线性可分数据集的分类问题，还能保证在有限的步骤内解决这个问题。证明见书P31。</p>
-<h3 id="感知机学习算法的对偶形式："><a href="#感知机学习算法的对偶形式：" class="headerlink" title="感知机学习算法的对偶形式："></a>感知机学习算法的对偶形式：</h3><p>SGD算法的更一般的形式，将超平面系数$\omega$和$b$表示为样本数据中实例$x_i$和标记$y_i$的线性组合，通过求解其系数进而求得$\omega$和$b$。<br><img src="/2018/03/20/统计学习方法第二章笔记/./对偶算法.png" alt="Alt text"><br>将$\omega$和$b$代入得到对偶算法的感知机模型：</p>
-<script type="math/tex; mode=display">f(x)=sign(\sum_{j=1}^{N}\alpha_j y_j x_j \cdot x + b )</script><p>可见，在求解的过程中，需要反复的计算$x_i$和$x_j$的乘积，为了方便，可以预先将训练集中实例间的内积计算出来并保存在矩阵中，即Gram矩阵。</p>
-<p>\begin{equation}<br>\left(<br>  \begin{array}{ccc}<br>    x_{1} \cdot x_{1} &amp; x_{1}\cdot x_{2} &amp;  …\\<br>   x_{2} \cdot x_{1} &amp; x_{2}\cdot x_{2}  &amp;…\\<br>   …&amp;…&amp;… \\<br>  x_{N} \cdot x_{1} &amp; x_{N}\cdot x_{2}  &amp;…\\<br>  \end{array}<br>\right) _{N\times N}<br>\end{equation}</p>
+        <h1 id="第三章-k近邻法"><a href="#第三章-k近邻法" class="headerlink" title="第三章 k近邻法"></a>第三章 k近邻法</h1><p>k近邻法（k-nearest neighbor，k-NN）是一种常用的<strong>分类及回归方法</strong>。k近邻法利用训练集对特征向量空间进行划分，并作为其分类的“模型”。k值的选择，距离度量及分类决策规则是k近邻法的三个基本要素。k近邻法的一个实现方法是——kd树。</p>
+<h2 id="k近邻算法"><a href="#k近邻算法" class="headerlink" title="k近邻算法"></a>k近邻算法</h2><p><img src="/2018/03/20/统计学习方法第三章笔记/./算法.jpg" alt="Alt text"><br>注意（1）中k的值是确定的，因此对于不同的样本$x$，其邻域半径也是不同的。（2）中式3.1表示了将$x$的类别判断为邻域中占多数的类别。（多数表决的数学表达式）</p>
+<h2 id="k近邻模型"><a href="#k近邻模型" class="headerlink" title="k近邻模型"></a>k近邻模型</h2><p>k近邻模型的三个基本要素是：距离度量，k值选择和分类决策规则。<br>距离度量——$L_p$距离（也叫闵可夫斯基距离）：<br><img src="/2018/03/20/统计学习方法第三章笔记/./Lp距离.jpg" alt="Alt text"></p>
+<h3 id="k值选择："><a href="#k值选择：" class="headerlink" title="k值选择："></a>k值选择：</h3><p>k值的选择会对k近邻法的结果产生重大影响。<br>当k值过小时，预测结果可能受近处的“噪声”影响，容易出现过拟合现象。k值小意味着模型将变得复杂。<br>当k值过大时，预测结果受较远的训练实例影响，也可能导致预测结果错误。k值大意味着模型将变得简单。<br>在应用中，一般通过交叉验证法来选择一个最合适的k值。</p>
+<h3 id="分类决策规则："><a href="#分类决策规则：" class="headerlink" title="分类决策规则："></a>分类决策规则：</h3><p>多数表决规则与经验风险最小化策略是等价的。<br>在分类任务中，预测分类取$k￥个样本中占多数的分类。<br>在回归任务中，预测值取$k$个样本所取值的平均值。</p>
+<h2 id="k近邻法的实现：kd树"><a href="#k近邻法的实现：kd树" class="headerlink" title="k近邻法的实现：kd树"></a>k近邻法的实现：kd树</h2><p>k近邻法最简单的实现方法是线性扫描（linear scan）。也就是对每一个输入的实例，都逐一计算它与每一个训练实例的距离，这种方法效率太低。一般采用kd树方法来减少计算量，提高搜索效率。</p>
+<h3 id="构造kd树："><a href="#构造kd树：" class="headerlink" title="构造kd树："></a>构造kd树：</h3><p>kd树是二叉树，表示对k维样本空间的一个划分（partition）。kd树的构造过程就是不断地用一个垂直于坐标轴的超平面来划分样本空间，直至将所有的样本都划分至一个单独的子区域内。<br>由于划分平面垂直于坐标轴，因此只要指定一个坐标轴，并给出一个切分点，就可以确定一个划分平面。<br>①坐标轴的选择：对于k维空间中深度为$j$的结点，选择第$L$个坐标轴，且$L=j(mod k)+1$。式中结点深度$j$表示该区域内样本被划分过的次数。$mod$为求余，$j(mod k)$ 表示$j$除以k的余数。<br>②切分点的选择：坐标轴确定后，则切分点一般选择要划分的区域内所有样本在该坐标轴上的坐标的中位数（从小到大排序，位于中间的数，或最中间两个数的平均值）。<br><img src="/2018/03/20/统计学习方法第三章笔记/./图3.3.jpg" alt="Alt text"><br>书上的例3.2在第一次划分时，选择了第1个坐标轴，6个样本在该轴上的坐标分别是2,5,9,4,8,7。则中位数=(5+7)/2=6。但是我们发现书上竟然把第一条划分线画在了x=7的位置，也就是经过了第6个样本点。这样做其实是可以的，因为无论第一条划分线选择x=6、x=5还是x=7，并不影响最终的划分结果。</p>
+<h3 id="搜索kd树："><a href="#搜索kd树：" class="headerlink" title="搜索kd树："></a>搜索kd树：</h3><p>构造完kd树，如何借助kd树进行搜索呢？<br>通过上面的方法，我们构建出如下图所示的kd树，下面以点$A(8,2.5)$为例，通过kd树搜索找到点$A$的最近邻点。<br><img src="/2018/03/20/统计学习方法第三章笔记/./图3.4.jpg" alt="Alt text"><br>①对于$A$，$x_1=8&gt;7$，$x_2=2.5&lt;6$，故A所在的区域与点$(8,1)$所在区域相同，欧氏距离为1.5，则以(8,1)为当前最近点。<br>②以1.5为半径，以$A$为圆心做圆。发现此圆与直线$x_1=7$相交，与$x_2=4$不相交，故最近邻点可能存在于$x_1&lt;7$，$x_2&lt;4$的区域内。<br>③此区域内有$(7,2)$、$(5,4)$、$(2,3)$三个点，分别计算与点A的欧氏距离，发现点$(7,2)$才是真正的最近邻点。<br>运用kd树，我们一共计算了四次欧氏距离，比线性搜索减少了两次。而且点A还是我特意选择的计算次数较多的一个点，对于一般的点，可能2次搜索就可以确定结果，可见kd树确实能有效的减少计算量。</p>
 
       
     </div>
@@ -391,8 +387,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/19/统计学习方法第一章笔记/" rel="next" title="《统计学习方法》第一章笔记">
-                <i class="fa fa-chevron-left"></i> 《统计学习方法》第一章笔记
+              <a href="/2018/03/20/统计学习方法第二章笔记/" rel="next" title="《统计学习方法》第二章笔记">
+                <i class="fa fa-chevron-left"></i> 《统计学习方法》第二章笔记
               </a>
             
           </div>
@@ -400,10 +396,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/20/统计学习方法第三章笔记/" rel="prev" title="《统计学习方法》第二章笔记">
-                《统计学习方法》第二章笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -539,7 +531,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-感知机"><span class="nav-number">1.</span> <span class="nav-text">第二章 感知机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机模型"><span class="nav-number">1.1.</span> <span class="nav-text">感知机模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机学习策略"><span class="nav-number">1.2.</span> <span class="nav-text">感知机学习策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机学习算法"><span class="nav-number">1.3.</span> <span class="nav-text">感知机学习算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SGD算法的收敛性："><span class="nav-number">1.3.1.</span> <span class="nav-text">SGD算法的收敛性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机学习算法的对偶形式："><span class="nav-number">1.3.2.</span> <span class="nav-text">感知机学习算法的对偶形式：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-k近邻法"><span class="nav-number">1.</span> <span class="nav-text">第三章 k近邻法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#k近邻算法"><span class="nav-number">1.1.</span> <span class="nav-text">k近邻算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k近邻模型"><span class="nav-number">1.2.</span> <span class="nav-text">k近邻模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#k值选择："><span class="nav-number">1.2.1.</span> <span class="nav-text">k值选择：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类决策规则："><span class="nav-number">1.2.2.</span> <span class="nav-text">分类决策规则：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k近邻法的实现：kd树"><span class="nav-number">1.3.</span> <span class="nav-text">k近邻法的实现：kd树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造kd树："><span class="nav-number">1.3.1.</span> <span class="nav-text">构造kd树：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索kd树："><span class="nav-number">1.3.2.</span> <span class="nav-text">搜索kd树：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
