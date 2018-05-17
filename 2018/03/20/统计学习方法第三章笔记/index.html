@@ -79,22 +79,22 @@
 
 
 
-<meta name="description" content="第三章 k近邻法k近邻法（k-nearest neighbor，k-NN）是一种常用的分类及回归方法。k近邻法利用训练集对特征向量空间进行划分，并作为其分类的“模型”。k值的选择，距离度量及分类决策规则是k近邻法的三个基本要素。k近邻法的一个实现方法是——kd树。 k近邻算法注意（1）中k的值是确定的，因此对于不同的样本$x$，其邻域半径也是不同的。（2）中式3.1表示了将$x$的类别判断为邻域中">
+<meta name="description" content="第三章 k近邻法k近邻法（k-nearest neighbor，k-NN）是一种常用的分类及回归方法。k近邻法利用训练集对特征向量空间进行划分，并作为其分类的“模型”。k值的选择，距离度量及分类决策规则是k近邻法的三个基本要素。k近邻法的一个实现方法是——kd树。">
 <meta name="keywords" content="学习笔记,统计学习方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《统计学习方法》第二章笔记">
 <meta property="og:url" content="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/index.html">
 <meta property="og:site_name" content="neutronar">
-<meta property="og:description" content="第三章 k近邻法k近邻法（k-nearest neighbor，k-NN）是一种常用的分类及回归方法。k近邻法利用训练集对特征向量空间进行划分，并作为其分类的“模型”。k值的选择，距离度量及分类决策规则是k近邻法的三个基本要素。k近邻法的一个实现方法是——kd树。 k近邻算法注意（1）中k的值是确定的，因此对于不同的样本$x$，其邻域半径也是不同的。（2）中式3.1表示了将$x$的类别判断为邻域中">
+<meta property="og:description" content="第三章 k近邻法k近邻法（k-nearest neighbor，k-NN）是一种常用的分类及回归方法。k近邻法利用训练集对特征向量空间进行划分，并作为其分类的“模型”。k值的选择，距离度量及分类决策规则是k近邻法的三个基本要素。k近邻法的一个实现方法是——kd树。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/算法.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/Lp距离.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/图3.3.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/图3.4.jpg">
-<meta property="og:updated_time" content="2018-05-17T02:24:08.951Z">
+<meta property="og:updated_time" content="2018-05-17T02:26:58.430Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《统计学习方法》第二章笔记">
-<meta name="twitter:description" content="第三章 k近邻法k近邻法（k-nearest neighbor，k-NN）是一种常用的分类及回归方法。k近邻法利用训练集对特征向量空间进行划分，并作为其分类的“模型”。k值的选择，距离度量及分类决策规则是k近邻法的三个基本要素。k近邻法的一个实现方法是——kd树。 k近邻算法注意（1）中k的值是确定的，因此对于不同的样本$x$，其邻域半径也是不同的。（2）中式3.1表示了将$x$的类别判断为邻域中">
+<meta name="twitter:description" content="第三章 k近邻法k近邻法（k-nearest neighbor，k-NN）是一种常用的分类及回归方法。k近邻法利用训练集对特征向量空间进行划分，并作为其分类的“模型”。k值的选择，距离度量及分类决策规则是k近邻法的三个基本要素。k近邻法的一个实现方法是——kd树。">
 <meta name="twitter:image" content="http://yoursite.com/2018/03/20/统计学习方法第三章笔记/算法.jpg">
 
 
@@ -347,7 +347,7 @@
       
 
       
-        <h1 id="第三章-k近邻法"><a href="#第三章-k近邻法" class="headerlink" title="第三章 k近邻法"></a>第三章 k近邻法</h1><p>k近邻法（k-nearest neighbor，k-NN）是一种常用的<strong>分类及回归方法</strong>。k近邻法利用训练集对特征向量空间进行划分，并作为其分类的“模型”。k值的选择，距离度量及分类决策规则是k近邻法的三个基本要素。k近邻法的一个实现方法是——kd树。</p>
+        <h1 id="第三章-k近邻法"><a href="#第三章-k近邻法" class="headerlink" title="第三章 k近邻法"></a>第三章 k近邻法</h1><p>k近邻法（k-nearest neighbor，k-NN）是一种常用的<strong>分类及回归方法</strong>。k近邻法利用训练集对特征向量空间进行划分，并作为其分类的“模型”。k值的选择，距离度量及分类决策规则是k近邻法的三个基本要素。k近邻法的一个实现方法是——kd树。<br><a id="more"></a></p>
 <h2 id="k近邻算法"><a href="#k近邻算法" class="headerlink" title="k近邻算法"></a>k近邻算法</h2><p><img src="/2018/03/20/统计学习方法第三章笔记/./算法.jpg" alt="Alt text"><br>注意（1）中k的值是确定的，因此对于不同的样本$x$，其邻域半径也是不同的。（2）中式3.1表示了将$x$的类别判断为邻域中占多数的类别。（多数表决的数学表达式）</p>
 <h2 id="k近邻模型"><a href="#k近邻模型" class="headerlink" title="k近邻模型"></a>k近邻模型</h2><p>k近邻模型的三个基本要素是：距离度量，k值选择和分类决策规则。<br>距离度量——$L_p$距离（也叫闵可夫斯基距离）：<br><img src="/2018/03/20/统计学习方法第三章笔记/./Lp距离.jpg" alt="Alt text"></p>
 <h3 id="k值选择："><a href="#k值选择：" class="headerlink" title="k值选择："></a>k值选择：</h3><p>k值的选择会对k近邻法的结果产生重大影响。<br>当k值过小时，预测结果可能受近处的“噪声”影响，容易出现过拟合现象。k值小意味着模型将变得复杂。<br>当k值过大时，预测结果受较远的训练实例影响，也可能导致预测结果错误。k值大意味着模型将变得简单。<br>在应用中，一般通过交叉验证法来选择一个最合适的k值。</p>
