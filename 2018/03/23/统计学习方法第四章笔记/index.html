@@ -79,26 +79,32 @@
 
 
 
-<meta name="description" content="第二章 感知机感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。">
+<meta name="description" content="第四章 朴素贝叶斯法朴素贝叶斯法（naive Bayes）是基于贝叶斯定理和特征条件独立假设的分类方法。对给定的训练数据集，学习其输入/输出的联合概率分布，然后基于此分布，对给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。">
 <meta name="keywords" content="统计学习方法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《统计学习方法》第二章笔记">
-<meta property="og:url" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/index.html">
+<meta property="og:title" content="《统计学习方法》第四章笔记">
+<meta property="og:url" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/index.html">
 <meta property="og:site_name" content="neutronar">
-<meta property="og:description" content="第二章 感知机感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。">
+<meta property="og:description" content="第四章 朴素贝叶斯法朴素贝叶斯法（naive Bayes）是基于贝叶斯定理和特征条件独立假设的分类方法。对给定的训练数据集，学习其输入/输出的联合概率分布，然后基于此分布，对给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机定义.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机几何图.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/损失函数.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/不考虑.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/梯度.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/SGD.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/对偶算法.png">
-<meta property="og:updated_time" content="2018-05-21T04:35:09.593Z">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯定理.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/条件概率分布参数太多.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/连乘.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/朴素贝叶斯表达.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯分类器.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯分类器2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/期望风险函数.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/期望风险函数最小化.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/极大似然估计1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/极大似然估计2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯估计.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯估计2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯网络.jpg">
+<meta property="og:updated_time" content="2018-05-21T04:35:19.448Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《统计学习方法》第二章笔记">
-<meta name="twitter:description" content="第二章 感知机感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机定义.jpg">
+<meta name="twitter:title" content="《统计学习方法》第四章笔记">
+<meta name="twitter:description" content="第四章 朴素贝叶斯法朴素贝叶斯法（naive Bayes）是基于贝叶斯定理和特征条件独立假设的分类方法。对给定的训练数据集，学习其输入/输出的联合概率分布，然后基于此分布，对给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯定理.jpg">
 
 
 
@@ -128,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/"/>
 
 
 
 
 
-  <title>《统计学习方法》第二章笔记 | neutronar</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>《统计学习方法》第四章笔记 | neutronar</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -261,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="neutronar">
@@ -278,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">《统计学习方法》第二章笔记</h1>
+          <h1 class="post-title" itemprop="name headline">《统计学习方法》第四章笔记</h1>
         
 
         <div class="post-meta">
@@ -290,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-20T00:00:00+08:00">
-                2018-03-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-23T00:00:00+08:00">
+                2018-03-23
               </time>
             
 
@@ -350,15 +356,12 @@
       
 
       
-        <h1 id="第二章-感知机"><a href="#第二章-感知机" class="headerlink" title="第二章 感知机"></a>第二章 感知机</h1><p>感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。<br><a id="more"></a></p>
-<h2 id="感知机模型"><a href="#感知机模型" class="headerlink" title="感知机模型"></a>感知机模型</h2><p><img src="/2018/03/20/统计学习方法第二章笔记/./感知机定义.jpg" alt="Alt text"><br>感知机的几何解释：在样本空间找到一个超平面$S$，在此超平面一侧的样本将被标记为正类，而另一侧的样本被标记为负类。<br><img src="/2018/03/20/统计学习方法第二章笔记/./感知机几何图.jpg" alt="Alt text"><br>有了这样一个模型，还必须解答两个问题：①数据集要满足什么条件，才存在这样的超平面$S$。②如果超平面$S$存在，怎么找出它。</p>
-<h2 id="感知机学习策略"><a href="#感知机学习策略" class="headerlink" title="感知机学习策略"></a>感知机学习策略</h2><p>①的答案是：训练数据集必须是线性可分的。这篇文章总结的很好，详见：<a href="https://blog.csdn.net/u013300875/article/details/44081067" target="_blank" rel="noopener">如何（高效）判断数据是否线性可分 by iouiwc。</a><br>②的答案是：如果一个超平面$S$的（经验）损失函数最小，那么这就是我们要找的超平面$S$。在这里，损失函数可以是误分类点到超平面$S$的距离之和：<br><img src="/2018/03/20/统计学习方法第二章笔记/./损失函数.jpg" alt="Alt text"><br>有人问下图中，为什么书上这里不考虑分母$||w||$呢？<br><img src="/2018/03/20/统计学习方法第二章笔记/./不考虑.jpg" alt="Alt text"><br>答案是，这个损失函数是定义在误分类点集合M上的函数，当所有的点都被正确分类以后，$M$为空，即没有误分类点了，这个函数自然达到最小值0。所以最小化损失函数其实就是在找这个函数等于0时的解。<br>换句话说，感知机只关心找到的超平面是否把两类样本一个不漏地划分开了，而不考虑该超平面是否是最好的那个。（如果考虑间隔最大的最优超平面，那就发展成为第七章所讲的“支持向量机”）</p>
-<h2 id="感知机学习算法"><a href="#感知机学习算法" class="headerlink" title="感知机学习算法"></a>感知机学习算法</h2><p>既然已经得到式2.4，现在问题就转化为找到一个能使之最小化的$S$，本节介绍了一种算法——随机梯度下降法（stochastic gradient descent，SGD）。<br>首先，随机生成一个超平面，这个超平面的误差肯定很大。我们可以每次让这个平面移动一点点，从而让误差减小一点点，直至误差极小化。那么问题就来了，怎么移动这一点点呢？<br>我们来看梯度的定义：<br><img src="/2018/03/20/统计学习方法第二章笔记/./梯度.png" alt="Alt text"><br>也就是说，一个函数在某处的梯度方向，就是该函数值升高最快的方向，于是我们可以求出损失函数的梯度，每次都沿着梯度的负方向移动，直至损失函数最小化。<br>具体做法如下：<br><img src="/2018/03/20/统计学习方法第二章笔记/./SGD.jpg" alt="Alt text"><br>$η(0&lt;η≤1)$为步长（有时也称为学习率），显然步长将影响算法的收敛性，收敛速度和精度，需要加以权衡。</p>
-<h3 id="SGD算法的收敛性："><a href="#SGD算法的收敛性：" class="headerlink" title="SGD算法的收敛性："></a>SGD算法的收敛性：</h3><p>直观上，SGD算法就是在寻找极小值，当函数只存在一个极小值时，这个极小值就是最小值，该算法最终可以收敛于此。但还有这样的情况，函数不只有一个极小值点，当该算法达到一个局域极小值的时候，由于步长有限，算法将被困在局域极小值。这并没有达到我们的要求。</p>
-<p>当数据集是线性可分的时候，SGD算法能否避免上述问题呢?<br>答案是肯定的，SGD不仅可以完美解决线性可分数据集的分类问题，还能保证在有限的步骤内解决这个问题。证明见书P31。</p>
-<h3 id="感知机学习算法的对偶形式："><a href="#感知机学习算法的对偶形式：" class="headerlink" title="感知机学习算法的对偶形式："></a>感知机学习算法的对偶形式：</h3><p>SGD算法的更一般的形式，将超平面系数$\omega$和$b$表示为样本数据中实例$x_i$和标记$y_i$的线性组合，通过求解其系数进而求得$\omega$和$b$。<br><img src="/2018/03/20/统计学习方法第二章笔记/./对偶算法.png" alt="Alt text"><br>将$\omega$和$b$代入得到对偶算法的感知机模型：</p>
-<script type="math/tex; mode=display">f(x)=sign(\sum_{j=1}^{N}\alpha_j y_j x_j \cdot x + b )</script><p>可见，在求解的过程中，需要反复的计算$x_i$和$x_j$的乘积，为了方便，可以预先将训练集中实例间的内积计算出来并保存在矩阵中，即Gram矩阵。</p>
-<p>\begin{equation}<br>\left(<br>  \begin{array}{ccc}<br>    x_{1} \cdot x_{1} &amp; x_{1}\cdot x_{2} &amp;  …\\<br>   x_{2} \cdot x_{1} &amp; x_{2}\cdot x_{2}  &amp;…\\<br>   …&amp;…&amp;… \\<br>  x_{N} \cdot x_{1} &amp; x_{N}\cdot x_{2}  &amp;…\\<br>  \end{array}<br>\right) _{N\times N}<br>\end{equation}</p>
+        <h1 id="第四章-朴素贝叶斯法"><a href="#第四章-朴素贝叶斯法" class="headerlink" title="第四章 朴素贝叶斯法"></a>第四章 朴素贝叶斯法</h1><p>朴素贝叶斯法（naive Bayes）是基于贝叶斯定理和特征条件独立假设的分类方法。<br>对给定的训练数据集，学习其输入/输出的联合概率分布，然后基于此分布，对给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。<br><a id="more"></a><br>先验概率：指根据以往经验，在没有进一步信息和观测的情况下猜测的概率。（在扔骰子前，从直觉上看，扔出6的概率为1/6，这就是先验概率。）<br>后验概率：指在得到某些有用的信息后，事件发生的概率。（看到这个骰子每一面都是6，则扔出6的概率必为1，这就是后验概率，也可以看做是一种条件概率。）</p>
+<h2 id="朴素贝叶斯法的学习与分类"><a href="#朴素贝叶斯法的学习与分类" class="headerlink" title="朴素贝叶斯法的学习与分类"></a>朴素贝叶斯法的学习与分类</h2><h3 id="基本方法："><a href="#基本方法：" class="headerlink" title="基本方法："></a>基本方法：</h3><p>朴素贝叶斯法核心就是贝叶斯定理，即：<br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯定理.jpg" alt="Alt text"><br>朴素贝叶斯法的思路就是，对于一个输入$x$，我们想得到$P(y|x)$。于是，只要把$P(y)$和$P(x)$找出来，再把$P(x|y)$找出来，就可以达到目的了。<br>但在应用时马上就遇到第一个问题：我们所给的输入$x$一般是一个多维的特征向量，而每个特征又有很多可能的取值。这时条件概率$P(x|y)$就变成如下的形式：<br><img src="/2018/03/23/统计学习方法第四章笔记/./条件概率分布参数太多.jpg" alt="Alt text"><br>这个式子中的参数个数为指数级，实际估计难度太大。<br>因此假设样本具有条件独立性（朴素一词得名于此假设），也就是说各个特征彼此是独立的，例如一个人的身高和眼睛的颜色是互相无关的。作出这个假设后，就可以把上面的公式拆成连乘的形式，这样我们一次只需要针对一个特征进行估计就可以了：<br><img src="/2018/03/23/统计学习方法第四章笔记/./连乘.jpg" alt="Alt text"><br>将上式代入贝叶斯公式，同时利用全概率公式，就得到了朴素贝叶斯法的最终表达形式：<br><img src="/2018/03/23/统计学习方法第四章笔记/./朴素贝叶斯表达.jpg" alt="Alt text"><br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯分类器.jpg" alt="Alt text"><br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯分类器2.jpg" alt="Alt text"><br>可以看出，给定输入$x$，朴素贝叶斯法将把$x$分到后验概率最大的类中。</p>
+<h3 id="后验概率最大化"><a href="#后验概率最大化" class="headerlink" title="后验概率最大化:"></a>后验概率最大化:</h3><p>上述的后验概率最大化等价于期望风险最小化。<br>具体地，选择0-1函数为损失函数，则期望风险函数为：<br><img src="/2018/03/23/统计学习方法第四章笔记/./期望风险函数.jpg" alt="Alt text"><br>上式表示，对所有的输入$X$，则分类器的输出$f(x)$在所有分类上产生的误差总和的期望值。要使上式最小化，只需对$X=x$逐个最小化。<br>如下式，求和号内的式子表示输入$X=x$在真实分类为$C_k$时，分类器的输出$y=f(x)$所产生的误差，对真实分类所有的可能取值$k$进行求和，就得到了分类器f在输入值为$X=x$时的总误差。为了让这个总误差最小，就要选择概率最大的那个类作为输出的类。（因为真实类可能是$C_k$中任何一个，总误差$R_{exp}(f)=E_x[L_1P_1+L_2P_2+L_3P_3…+L_kP_k]$中只能有一项为零，其他项都是产生误差的项，因此最好让为零的那一项最大，总误差就会达到最小）<br><img src="/2018/03/23/统计学习方法第四章笔记/./期望风险函数最小化.jpg" alt="Alt text"><br>这就证明了在朴素贝叶斯法中，后验概率最大化的策略等价于期望风险最小化。</p>
+<h2 id="朴素贝叶斯法的参数估计"><a href="#朴素贝叶斯法的参数估计" class="headerlink" title="朴素贝叶斯法的参数估计"></a>朴素贝叶斯法的参数估计</h2><p>上节说到，只要把$P(y)$和$P(x)$找出来，再把$P(x|y)$找出来，就可以达到目的。关键是，样本真实的概率分布是未知的，因此要用某个统计量作为一种真实分布的估计。在朴素贝叶斯法中，用频率作为概率的近似，就是一种极大似然估计。<br><img src="/2018/03/23/统计学习方法第四章笔记/./极大似然估计1.jpg" alt="Alt text"><br><img src="/2018/03/23/统计学习方法第四章笔记/./极大似然估计2.jpg" alt="Alt text"><br>以上即为参数估计的具体表达形式。（$P(x)$由全概率公式得到）</p>
+<h3 id="贝叶斯估计："><a href="#贝叶斯估计：" class="headerlink" title="贝叶斯估计："></a>贝叶斯估计：</h3><p>上述极大似然估计在某些特殊情况下，会导致要估计的概率值为0（概率不为0，频率却可能为0），这就影响了后验概率的计算（注意在朴素贝叶斯法中，条件概率被分解为一个连乘式）。解决这一问题的方法是采用贝叶斯估计。<br>如图为条件概率的贝叶斯估计。贝叶斯估计相当于考虑了待估计量的先验概率。<br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯估计.jpg" alt="Alt text"><br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯估计2.jpg" alt="Alt text"><br>上式中常取$λ=1$，称为拉普拉斯平滑。</p>
+<p>注：朴素贝叶斯假设了条件独立性，若假设条件之间存在概率依存关系，模型就变成了贝叶斯网络。<br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯网络.jpg" alt="Alt text"><br>如图为七个特征的依存关系，则他们的全概率不再是七个概率独立的相乘，而是：<br>$P(x_1,x_2,x_3,x_4,x_5,x_6,x_7)=P(x_1)·P(x_2)·P(x_3)·P(x_4∣x_1,x_2,x_3)·P(x_5∣x_1,x_3)·P(x_6∣x_4)·P(x_7∣x_4,x_5)$</p>
 
       
     </div>
@@ -389,8 +392,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/19/统计学习方法第一章笔记/" rel="next" title="《统计学习方法》第一章笔记">
-                <i class="fa fa-chevron-left"></i> 《统计学习方法》第一章笔记
+              <a href="/2018/03/20/统计学习方法第三章笔记/" rel="next" title="《统计学习方法》第三章笔记">
+                <i class="fa fa-chevron-left"></i> 《统计学习方法》第三章笔记
               </a>
             
           </div>
@@ -399,8 +402,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/20/统计学习方法第三章笔记/" rel="prev" title="《统计学习方法》第三章笔记">
-                《统计学习方法》第三章笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/24/统计学习方法第五章笔记/" rel="prev" title="《统计学习方法》第五章笔记">
+                《统计学习方法》第五章笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -537,7 +540,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-感知机"><span class="nav-number">1.</span> <span class="nav-text">第二章 感知机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机模型"><span class="nav-number">1.1.</span> <span class="nav-text">感知机模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机学习策略"><span class="nav-number">1.2.</span> <span class="nav-text">感知机学习策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机学习算法"><span class="nav-number">1.3.</span> <span class="nav-text">感知机学习算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SGD算法的收敛性："><span class="nav-number">1.3.1.</span> <span class="nav-text">SGD算法的收敛性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机学习算法的对偶形式："><span class="nav-number">1.3.2.</span> <span class="nav-text">感知机学习算法的对偶形式：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-朴素贝叶斯法"><span class="nav-number">1.</span> <span class="nav-text">第四章 朴素贝叶斯法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#朴素贝叶斯法的学习与分类"><span class="nav-number">1.1.</span> <span class="nav-text">朴素贝叶斯法的学习与分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本方法："><span class="nav-number">1.1.1.</span> <span class="nav-text">基本方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后验概率最大化"><span class="nav-number">1.1.2.</span> <span class="nav-text">后验概率最大化:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#朴素贝叶斯法的参数估计"><span class="nav-number">1.2.</span> <span class="nav-text">朴素贝叶斯法的参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#贝叶斯估计："><span class="nav-number">1.2.1.</span> <span class="nav-text">贝叶斯估计：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
