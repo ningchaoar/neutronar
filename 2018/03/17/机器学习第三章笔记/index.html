@@ -87,24 +87,15 @@
 <meta property="og:site_name" content="neutronar">
 <meta property="og:description" content="第三章 线性模型基本形式线性模型具有很好的可解释性，参数w直观地表现了示例的各个属性值的重要性，这种模型与人的思维习惯是相符的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/基本形式.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/最小二乘.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/对率函数.png">
 <meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/对率函数示意图.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/对率函数变形.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/似然函数1.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/似然函数2.png">
 <meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/LDA.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/广义瑞利商.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/w.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/Sw分解.png">
 <meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/OvR.png">
 <meta property="og:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/ECOC.png">
-<meta property="og:updated_time" content="2018-05-21T04:34:58.381Z">
+<meta property="og:updated_time" content="2018-05-21T09:11:40.045Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《机器学习》第三章笔记">
 <meta name="twitter:description" content="第三章 线性模型基本形式线性模型具有很好的可解释性，参数w直观地表现了示例的各个属性值的重要性，这种模型与人的思维习惯是相符的。">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/基本形式.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/17/机器学习第三章笔记/对率函数示意图.png">
 
 
 
@@ -356,11 +347,34 @@
       
 
       
-        <h1 id="第三章-线性模型"><a href="#第三章-线性模型" class="headerlink" title="第三章 线性模型"></a>第三章 线性模型</h1><h2 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h2><p>线性模型具有很好的可解释性，参数w直观地表现了示例的各个属性值的重要性，这种模型与人的思维习惯是相符的。<br><a id="more"></a><br><img src="/2018/03/17/机器学习第三章笔记/./基本形式.png" alt="Alt text"></p>
-<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>线性模型最基础的应用就是线性回归。<br>当随机变量$X$连续时，线性回归就是找到一条能够刻画$Y = f(X)= a+bx$的直线（如图为最小二乘法的解）。<br><img src="/2018/03/17/机器学习第三章笔记/./最小二乘.png" alt="Alt text"><br>但是实际中，也常有离散的属性，若属性值间存在“序”（order）关系，则将其连续化——转化为用数值大小代表顺序的特征向量。若属性值间不存在序关系，则可以将其转化为k维空间中互相垂直的特征向量。</p>
+        <h1 id="第三章-线性模型"><a href="#第三章-线性模型" class="headerlink" title="第三章 线性模型"></a>第三章 线性模型</h1><h2 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h2><p>线性模型具有很好的可解释性，参数w直观地表现了示例的各个属性值的重要性，这种模型与人的思维习惯是相符的。<br><a id="more"></a></p>
+<blockquote>
+<p>给定由$d$个属性描述的示例$x=(x_1;x_2;…;x_d)$，其中$x_i$是$x$在第$i$个属性上的取值，线性模型（Linear model）试图学得一个通过属性的线性组合来进行预测的函数，即</p>
+<script type="math/tex; mode=display">f(x = w_1x_1+w_2x_2+...+w_dx_d+b)</script><p>一般用向量形式写成</p>
+<script type="math/tex; mode=display">f(x)=w^T x+b</script><p>其中$w=(w_1;w_2;…;w_d)$。$w$和$b$学得之后，模型就得以确定。</p>
+</blockquote>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>线性模型最基础的应用就是线性回归。<br>当随机变量$X$连续时，线性回归就是找到一条能够刻画$Y = f(X)= a+bx$的直线（如下为最小二乘法的解）。</p>
+<script type="math/tex; mode=display">
+w=\frac{\sum\limits_{i=1}^m (y_i-\bar{y})(x_i-\bar{x})}{\sum\limits_{i=1}^m (x_i-\bar{x})^2}=\frac{\sum\limits_{i=1}^m (y_ix_i)-m\bar{x}\bar{y}}{\sum\limits_{i=1}^m (x_i^2)-m\bar{x}^2} \qquad b=\frac{1}{m}\sum\limits_{i=1}^m(y_i-wx_i)</script><p>但是实际中，也常有离散的属性，若属性值间存在“序”（order）关系，则将其连续化——转化为用数值大小代表顺序的特征向量。若属性值间不存在序关系，则可以将其转化为k维空间中互相垂直的特征向量。</p>
 <p><strong>多元线性回归：</strong>上述线性回归只考虑了最简单的情况——输入的样例仅有一个属性。更一般的情形每个样例都由多个属性来描述，这样的任务称为多元线性回归。多元线性回归的解法完全类似一元线性回归，区别在于求解前者的过程将涉及矩阵计算。<br><strong>广义线性回归：</strong>（generalized linear regression）：将$(w·x+b)$整体作为一个自变量，求取输入空间到输出空间的非线性函数映射。当这种映射为$ln y = (w·x+b)$时，成为对数线性回归（log-linear regression）。</p>
-<h2 id="对数几率回归"><a href="#对数几率回归" class="headerlink" title="对数几率回归"></a>对数几率回归</h2><p>上节讨论了线性模型在回归任务中的应用，它也可以应用在分类任务中。只需将对数几率函数作为上述广义线性回归中的非线性函数映射，就可以将回归与分类联系在一起。<br>对数几率函数及其示意图：<br><img src="/2018/03/17/机器学习第三章笔记/./对率函数.png" alt="Alt text"><br><img src="/2018/03/17/机器学习第三章笔记/./对率函数示意图.png" alt="Alt text"><br>对数几率函数在$(-∞，0)$为凹，在$(0,+∞)$为凸。在R上单调递增且任意阶可导，具有良好的数学性质。<br>对对数几率函数进行变形，得到下式：<br><img src="/2018/03/17/机器学习第三章笔记/./对率函数变形.png" alt="Alt text"><br>若以$y$为样本作为正例的可能性，则$1-y$是其反例的可能性，两者比值称为“几率”（odds），取对数得到“对数几率”（log odds，logit）。这就是对数几率回归这一名称的由来。有些教材将logit regression取其发音翻译为逻辑回归，实际上与逻辑一词并没有什么关系。<br>与线性回归的最小二乘法一样，对数几率回归也有一套参数估计方法，称为对数似然法。<br><img src="/2018/03/17/机器学习第三章笔记/./似然函数1.png" alt="Alt text"><br><img src="/2018/03/17/机器学习第三章笔记/./似然函数2.png" alt="Alt text"><br>由于上式是关于β的高阶可导连续凸函数，因此可以采用梯度下降法（gradient descent）、牛顿法等数值优化算法求得其最优解。</p>
-<h2 id="线性判别分析"><a href="#线性判别分析" class="headerlink" title="线性判别分析"></a>线性判别分析</h2><p>线性判别分析（Linear Discriminant Analysis，LDA）是一种经典的线性学习方法，最早用于处理二分类问题。<br>如图所示，LDA的基本思想就是，找到这样一个直线，将样例向该直线上投影，使得同类投影点尽可能接近，异类投影点尽可能远离。<br><img src="/2018/03/17/机器学习第三章笔记/./LDA.png" alt="Alt text"><br>如何从数学上描述这种“同类聚，异类离”的思想呢？<br>如下所述：<br><img src="/2018/03/17/机器学习第三章笔记/./广义瑞利商.png" alt="Alt text"><br>本书后面又定义了“类内散度矩阵$Sw$”、“类间散度矩阵$Sb$”等，均是为了简化上式。<br>简化后得到$w$的估计：<br><img src="/2018/03/17/机器学习第三章笔记/./w.png" alt="Alt text"><br>实际操作中一般先将$Sw$分解：<br><img src="/2018/03/17/机器学习第三章笔记/./Sw分解.png" alt="Alt text"><br>分解方法见书附录A.3<br>LDA通过投影减小了样本点的维数，且投影过程中使用了类别信息，因此LDA也被视为一种经典的监督降维技术。</p>
+<h2 id="对数几率回归"><a href="#对数几率回归" class="headerlink" title="对数几率回归"></a>对数几率回归</h2><p>上节讨论了线性模型在回归任务中的应用，它也可以应用在分类任务中。只需将对数几率函数作为上述广义线性回归中的非线性函数映射，就可以将回归与分类联系在一起。<br>对数几率函数及其示意图：</p>
+<script type="math/tex; mode=display">y=\frac{1}{1+e^{-(w^Tx+b)}}</script><p><img src="/2018/03/17/机器学习第三章笔记/./对率函数示意图.png" alt="Alt text"><br>对数几率函数在$(-∞，0)$为凹，在$(0,+∞)$为凸。在R上单调递增且任意阶可导，具有良好的数学性质。<br>对对数几率函数进行变形，得到下式：</p>
+<script type="math/tex; mode=display">ln\frac{y}{1-y}=w^Tx+b</script><p>若以$y$为样本作为正例的可能性，则$1-y$是其反例的可能性，两者比值称为“几率”（odds），取对数得到“对数几率”（log odds，logit）。这就是对数几率回归这一名称的由来。有些教材将logit regression取其发音翻译为逻辑回归，实际上与逻辑一词并没有什么关系。<br>与线性回归的最小二乘法一样，对数几率回归也有一套参数估计方法，称为对数似然法。</p>
+<script type="math/tex; mode=display">\mathscr{l}(w,b)=\sum_{i=1}^m \ln p(y_i\mid x_i;w,b)</script><script type="math/tex; mode=display">\mathscr{l}(\beta) = \sum_{i=1}^m (-y_i\beta^T\hat{x}_i+\ln(1+e^{\beta^T\hat{x}_i}))</script><p>由于上式是关于$\beta$的高阶可导连续凸函数，因此可以采用梯度下降法（gradient descent）、牛顿法等数值优化算法求得其最优解。</p>
+<h2 id="线性判别分析"><a href="#线性判别分析" class="headerlink" title="线性判别分析"></a>线性判别分析</h2><p>线性判别分析（Linear Discriminant Analysis，LDA）是一种经典的线性学习方法，最早用于处理二分类问题。<br>如图所示，LDA的基本思想就是，找到这样一个直线，将样例向该直线上投影，使得同类投影点尽可能接近，异类投影点尽可能远离。<br><img src="/2018/03/17/机器学习第三章笔记/./LDA.png" alt="Alt text"><br>如何从数学上描述这种“同类聚，异类离”的思想呢？<br>如下所述：</p>
+<blockquote>
+<p>欲使同类样例的投影点尽可能接近，可以让同类样例投影点的协方差尽可能小，即$w^T\Sigma_0w+w^T\Sigma_1w$尽可能小；而欲使异类样例的投影点尽可能远离，可以让类中心之间的距离尽可能大，即$||w^T\mu_0-w^T\mu_1||^2_2$尽可能大。同时考虑二者，则可以得到欲最大化的目标</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+J&=\frac{||w^T\mu_0-w^T\mu_1||^2_2}{w^T\Sigma_0w+w^T\Sigma_1w}\\
+&=\frac{w^T(\mu_0-\mu_1)(\mu_0-\mu_1)^Tw}{w^T(\Sigma_0+\Sigma_1)w}
+\end{align*}</script></blockquote>
+<p>本书后面又定义了“类内散度矩阵$Sw$”、“类间散度矩阵$Sb$”等，均是为了简化上式。<br>简化后得到$w$的估计：</p>
+<script type="math/tex; mode=display">w=S_w^{-1}(\mu_0-\mu_1)</script><p>实际操作中一般先将$Sw$分解：</p>
+<blockquote>
+<p>考虑到数值解的稳定性，在实践中通常是对$S_w$进行奇异值分解，即$S_w=\rm U\Sigma V^T$，这里$\Sigma$是一个实对角矩阵，其对角线上的元素是$S_w$的奇异值，然后再由$S_w^{-1}=\rm V\Sigma^{-1} U^T得到S_w^{-1}$。</p>
+</blockquote>
+<p>分解方法见书附录A.3<br>LDA通过投影减小了样本点的维数，且投影过程中使用了类别信息，因此LDA也被视为一种经典的监督降维技术。</p>
 <h2 id="多分类学习"><a href="#多分类学习" class="headerlink" title="多分类学习"></a>多分类学习</h2><p>解决多分类任务常用的策略是将多分类任务拆解为若干个二分类任务。<br>最经典的拆分策略有如下三种：<br><strong>①“一对一”（OvO）</strong>：将$N$个类别两两配对，进而产生$C_N^2$个二分类任务。每一个二分类任务训练处一个分类器。当新样本到来时，将其提交给各个分类器，最后给出$C_N^2$个预测分类结果，其中最多的类别就作为最终分类结果。</p>
 <p><strong>②“一对余”（OvR）</strong>：在$N$个类别中每次抽出一个类别作为正类，将剩余的$(N-1)$个类别作为负类，产生一个二分类任务，并训练出一个分类器。遍历所有类别，最终产生出$N$个分类器。当新样本到来时，将其提交给各个分类器，若只有一个分类器将其预测为正类，则该样本的类别与之相同。若有多个分类器预测为正类，则考虑各分类器的预测置信度，选择置信度最大的那一个。<br><img src="/2018/03/17/机器学习第三章笔记/./OvR.png" alt="Alt text"><br>OvO训练了$C_N^2$个训练器，但每次训练只用到两个类别的数据。OvR只训练了$N$个训练器，但每次训练都使用了全体数据。假设每个类别的样本数为$M$，则OvO在训练中总共使用了$N·(N-1)·M$个样本，而OvR则使用了$N·N·M$个样本，当$N$很大时，OvO将比OvR训练时间短得多。<br>书上介绍两者的性能在多数情况下差不多。</p>
 <p><strong>③“多对多”（MvM）</strong>：将$N$个类别进行$M$次划分，每次将一部分划分为正类，另一部分划分为负类，共产生$M$个分类器。显然$M=C_N^2$时就是OvO，$M=N$时就是OvR。<br>如图所示为一种常用的MvM技术——“纠错输出码”（Error Correcting Output Codes，ECOC）<br><img src="/2018/03/17/机器学习第三章笔记/./ECOC.png" alt="Alt text"><br>编码越长，纠错能力越强，但计算开销也会随之增大。另一方面，类别之间的组合是有限的，码长超过一定范围也就失去了意义。<br>对同等长度的编码，理论上来说，任意两个类别之间的编码距离越远，则纠错能力越强。因此，在码长较小时可以根据这个原则计算出理论最优编码。</p>
