@@ -87,18 +87,12 @@
 <meta property="og:site_name" content="neutronar">
 <meta property="og:description" content="第二章 感知机感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机定义.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机几何图.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/损失函数.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/不考虑.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/梯度.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/SGD.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/对偶算法.png">
-<meta property="og:updated_time" content="2018-05-21T04:35:09.593Z">
+<meta property="og:updated_time" content="2018-05-21T14:48:15.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《统计学习方法》第二章笔记">
 <meta name="twitter:description" content="第二章 感知机感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机定义.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/20/统计学习方法第二章笔记/感知机几何图.jpg">
 
 
 
@@ -351,14 +345,47 @@
 
       
         <h1 id="第二章-感知机"><a href="#第二章-感知机" class="headerlink" title="第二章 感知机"></a>第二章 感知机</h1><p>感知机（perceptron）是二类分类的线性分类模型，是神经网络和支持向量机的基础。<br><a id="more"></a></p>
-<h2 id="感知机模型"><a href="#感知机模型" class="headerlink" title="感知机模型"></a>感知机模型</h2><p><img src="/2018/03/20/统计学习方法第二章笔记/./感知机定义.jpg" alt="Alt text"><br>感知机的几何解释：在样本空间找到一个超平面$S$，在此超平面一侧的样本将被标记为正类，而另一侧的样本被标记为负类。<br><img src="/2018/03/20/统计学习方法第二章笔记/./感知机几何图.jpg" alt="Alt text"><br>有了这样一个模型，还必须解答两个问题：①数据集要满足什么条件，才存在这样的超平面$S$。②如果超平面$S$存在，怎么找出它。</p>
-<h2 id="感知机学习策略"><a href="#感知机学习策略" class="headerlink" title="感知机学习策略"></a>感知机学习策略</h2><p>①的答案是：训练数据集必须是线性可分的。这篇文章总结的很好，详见：<a href="https://blog.csdn.net/u013300875/article/details/44081067" target="_blank" rel="noopener">如何（高效）判断数据是否线性可分 by iouiwc。</a><br>②的答案是：如果一个超平面$S$的（经验）损失函数最小，那么这就是我们要找的超平面$S$。在这里，损失函数可以是误分类点到超平面$S$的距离之和：<br><img src="/2018/03/20/统计学习方法第二章笔记/./损失函数.jpg" alt="Alt text"><br>有人问下图中，为什么书上这里不考虑分母$||w||$呢？<br><img src="/2018/03/20/统计学习方法第二章笔记/./不考虑.jpg" alt="Alt text"><br>答案是，这个损失函数是定义在误分类点集合M上的函数，当所有的点都被正确分类以后，$M$为空，即没有误分类点了，这个函数自然达到最小值0。所以最小化损失函数其实就是在找这个函数等于0时的解。<br>换句话说，感知机只关心找到的超平面是否把两类样本一个不漏地划分开了，而不考虑该超平面是否是最好的那个。（如果考虑间隔最大的最优超平面，那就发展成为第七章所讲的“支持向量机”）</p>
-<h2 id="感知机学习算法"><a href="#感知机学习算法" class="headerlink" title="感知机学习算法"></a>感知机学习算法</h2><p>既然已经得到式2.4，现在问题就转化为找到一个能使之最小化的$S$，本节介绍了一种算法——随机梯度下降法（stochastic gradient descent，SGD）。<br>首先，随机生成一个超平面，这个超平面的误差肯定很大。我们可以每次让这个平面移动一点点，从而让误差减小一点点，直至误差极小化。那么问题就来了，怎么移动这一点点呢？<br>我们来看梯度的定义：<br><img src="/2018/03/20/统计学习方法第二章笔记/./梯度.png" alt="Alt text"><br>也就是说，一个函数在某处的梯度方向，就是该函数值升高最快的方向，于是我们可以求出损失函数的梯度，每次都沿着梯度的负方向移动，直至损失函数最小化。<br>具体做法如下：<br><img src="/2018/03/20/统计学习方法第二章笔记/./SGD.jpg" alt="Alt text"><br>$η(0&lt;η≤1)$为步长（有时也称为学习率），显然步长将影响算法的收敛性，收敛速度和精度，需要加以权衡。</p>
+<h2 id="感知机模型"><a href="#感知机模型" class="headerlink" title="感知机模型"></a>感知机模型</h2><blockquote>
+<p><strong>定义2.1（感知机）</strong> 假设输入空间（特征空间）是$\mathcal X \subseteq \rm R^n$，输出空间是$\mathcal Y = \{+1,-1\}$。输入$x \in \mathcal X$表示实例的特征向量，对应于输入空间（特征空间）的点；输出$y \in \mathcal Y$表示实例的类别。由输入空间到输出空间的如下函数</p>
+<script type="math/tex; mode=display">f(x)={\rm sign}(w\cdot x+b)</script><p>称为感知机。其中，$w$和$b$为感知机模型参数，$w \in \rm R^n$叫做权值（weight）或权值向量（weight vector），$b \in \rm R$叫做偏置（bias），$w\cdot x$表示$w$和$x$的内积。$\rm sign$是符号函数，即</p>
+<script type="math/tex; mode=display">
+{\rm sign}(x)=\begin{cases}
++1,\quad \text x \geqslant 0\\
+-1,\quad \text x < 0
+\end{cases}</script><p>感知机的几何解释：在样本空间找到一个超平面$S$，在此超平面一侧的样本将被标记为正类，而另一侧的样本被标记为负类。<br><img src="/2018/03/20/统计学习方法第二章笔记/./感知机几何图.jpg" alt="Alt text"><br>有了这样一个模型，还必须解答两个问题：①数据集要满足什么条件，才存在这样的超平面$S$。②如果超平面$S$存在，怎么找出它。</p>
+</blockquote>
+<h2 id="感知机学习策略"><a href="#感知机学习策略" class="headerlink" title="感知机学习策略"></a>感知机学习策略</h2><p>①的答案是：训练数据集必须是线性可分的。这篇文章总结的很好，详见：<a href="https://blog.csdn.net/u013300875/article/details/44081067" target="_blank" rel="noopener">如何（高效）判断数据是否线性可分 by iouiwc。</a><br>②的答案是：如果一个超平面$S$的（经验）损失函数最小，那么这就是我们要找的超平面$S$。在这里，损失函数可以是误分类点到超平面$S$的距离之和：</p>
+<blockquote>
+<p>给定训练数据集</p>
+<script type="math/tex; mode=display">T = \{(x_1,y_1),(x_2,y_2),...,(x_N,y_N)\}</script><p>其中$x_i \in \mathcal X = \rm R^n, \quad y_i \in \mathcal Y = \{+1,-1\},\quad i=1,2,…,N$。感知机${\rm sign}(w\cdot x+b)$学习的损失函数定义为</p>
+<script type="math/tex; mode=display">L(w,b)=-\sum_{x_i \in M}y_i(w\cdot x_i+b)</script><p>其中$M$为误分类点的几何，这个损失函数就是感知机学习的经验风险函数。</p>
+</blockquote>
+<p>有人问下式中，为什么书上这里不考虑分母$||w||$呢？</p>
+<blockquote>
+<p>这样，假设超平面$S$的误分类点集合为$M$，那么所有误分类点到超平面$S$的总距离为</p>
+<script type="math/tex; mode=display">-\frac{1}{||w||}\sum_{x_i \in M}y_i(w\cdot x +b)</script><p>不考虑$\frac{1}{||w||}$就得到感知机学习的损失函数。</p>
+</blockquote>
+<p>答案是，这个损失函数是定义在误分类点集合$M$上的函数，当所有的点都被正确分类以后，$M$为空，即没有误分类点了，这个函数自然达到最小值0。所以最小化损失函数其实就是在找这个函数等于0时的解。<br>换句话说，感知机只关心找到的超平面是否把两类样本一个不漏地划分开了，而不考虑该超平面是否是最好的那个。（如果考虑间隔最大的最优超平面，那就发展成为第七章所讲的“支持向量机”）</p>
+<h2 id="感知机学习算法"><a href="#感知机学习算法" class="headerlink" title="感知机学习算法"></a>感知机学习算法</h2><p>既然已经得到式2.4，现在问题就转化为找到一个能使之最小化的$S$，本节介绍了一种算法——随机梯度下降法（stochastic gradient descent，SGD）。<br>首先，随机生成一个超平面，这个超平面的误差肯定很大。我们可以每次让这个平面移动一点点，从而让误差减小一点点，直至误差极小化。那么问题就来了，怎么移动这一点点呢？<br>我们来看梯度的定义：</p>
+<blockquote>
+<script type="math/tex; mode=display">{\rm grad}\ f(x_0,y_0)=\frac{\partial f}{\partial n}n</script><p>这一关系式表明了函数在一点的梯度与过这点的等值线、方向倒数间的关系。这就是说：函数在一点的梯度方向与等值线在这点的一个发现方向相同，它的指向为从数值较低的等值线指向数值较高的等值线，梯度的模就等于函数在这个法线方向的方向导数。</p>
+</blockquote>
+<p>也就是说，一个函数在某处的梯度方向，就是该函数值升高最快的方向，于是我们可以求出损失函数的梯度，每次都沿着梯度的负方向移动，直至损失函数最小化。<br>具体做法如下：</p>
+<blockquote>
+<p>算法2.1（感知机学习算法的原始形式）<br>输入：训练数据集$T = \{(x_1,y_1),(x_2,y_2),…,(x_N,y_N)\}$，其中$x_i \in \mathcal X = \rm R^n, \ y_i \in \mathcal Y = \{+1,-1\},\ i=1,2,…,N;$学习率$\eta(0&lt;\eta \leqslant 1);$<br>输出：$w,b;$感知机模型$f(x)={\rm sign}(w\cdot x+b)$。、<br>（1）选取初值$w_0,b_0$<br>（2）在训练集中选取数据$(x_i,y_i)$<br>（3）如果$y_i(w\cdot x_i+b)\leqslant 0$</p>
+<script type="math/tex; mode=display">w\gets w+\eta y_ix_i</script><script type="math/tex; mode=display">b\gets b+\eta y_i</script><p>（4）转至（2），直至训练集中没有误分类点。</p>
+</blockquote>
+<p>$η(0&lt;η≤1)$为步长（有时也称为学习率），显然步长将影响算法的收敛性，收敛速度和精度，需要加以权衡。</p>
 <h3 id="SGD算法的收敛性："><a href="#SGD算法的收敛性：" class="headerlink" title="SGD算法的收敛性："></a>SGD算法的收敛性：</h3><p>直观上，SGD算法就是在寻找极小值，当函数只存在一个极小值时，这个极小值就是最小值，该算法最终可以收敛于此。但还有这样的情况，函数不只有一个极小值点，当该算法达到一个局域极小值的时候，由于步长有限，算法将被困在局域极小值。这并没有达到我们的要求。</p>
 <p>当数据集是线性可分的时候，SGD算法能否避免上述问题呢?<br>答案是肯定的，SGD不仅可以完美解决线性可分数据集的分类问题，还能保证在有限的步骤内解决这个问题。证明见书P31。</p>
-<h3 id="感知机学习算法的对偶形式："><a href="#感知机学习算法的对偶形式：" class="headerlink" title="感知机学习算法的对偶形式："></a>感知机学习算法的对偶形式：</h3><p>SGD算法的更一般的形式，将超平面系数$\omega$和$b$表示为样本数据中实例$x_i$和标记$y_i$的线性组合，通过求解其系数进而求得$\omega$和$b$。<br><img src="/2018/03/20/统计学习方法第二章笔记/./对偶算法.png" alt="Alt text"><br>将$\omega$和$b$代入得到对偶算法的感知机模型：</p>
-<script type="math/tex; mode=display">f(x)=sign(\sum_{j=1}^{N}\alpha_j y_j x_j \cdot x + b )</script><p>可见，在求解的过程中，需要反复的计算$x_i$和$x_j$的乘积，为了方便，可以预先将训练集中实例间的内积计算出来并保存在矩阵中，即Gram矩阵。</p>
-<p>\begin{equation}<br>\left(<br>  \begin{array}{ccc}<br>    x_{1} \cdot x_{1} &amp; x_{1}\cdot x_{2} &amp;  …\\<br>   x_{2} \cdot x_{1} &amp; x_{2}\cdot x_{2}  &amp;…\\<br>   …&amp;…&amp;… \\<br>  x_{N} \cdot x_{1} &amp; x_{N}\cdot x_{2}  &amp;…\\<br>  \end{array}<br>\right) _{N\times N}<br>\end{equation}</p>
+<h3 id="感知机学习算法的对偶形式："><a href="#感知机学习算法的对偶形式：" class="headerlink" title="感知机学习算法的对偶形式："></a>感知机学习算法的对偶形式：</h3><p>SGD算法的更一般的形式，将超平面系数$\omega$和$b$表示为样本数据中实例$x_i$和标记$y_i$的线性组合，通过求解其系数进而求得$\omega$和$b$。</p>
+<blockquote>
+<p>对偶形式的基本想法是，将$w$和$b$表示为实例$x_i$和标记$y_i$的线性组合的形式。通过求解其系数而求得$w$和$b$。不失一般性，在算法2.1中可假设初始值$w_0,b_0$均为$0$.对误分类点$(x_i,y_i)$通过</p>
+<script type="math/tex; mode=display">w\gets w+\eta y_ix_i</script><script type="math/tex; mode=display">b\gets b+\eta y_i</script><p>逐步修改$w,b$，设修改$n$次，则$w,b$关于$(x_i,y_i)$的增量分别是$\alpha_iy_ix_i$和$\alpha_iy_i$，这里$\alpha_i=n_i\eta$。这样，从学习过程不难看出，最后学习到的$w,b$可以分别表示为</p>
+<script type="math/tex; mode=display">w=\sum_{i=1}^N\alpha_iy_ix_i</script><script type="math/tex; mode=display">b = \sum_{i=1}^N \alpha_iy_i</script><p>这里，$\alpha_i \geqslant 0,i=1,2,…,N$，当$\eta = 1$时，表示第$i$个实例点由于误分而进行更新的次数。实例点更新次数越多，意味着它距离分离超平面越近，也就越难正确分类。换句话说，这样的实例对学习结果影响最大。</p>
+</blockquote>
+<p>将$\omega$和$b$代入得到对偶算法的感知机模型：</p>
+<script type="math/tex; mode=display">f(x)=sign(\sum_{j=1}^{N}\alpha_j y_j x_j \cdot x + b )</script><p>可见，在求解的过程中，需要反复的计算$x_i$和$x_j$的乘积，为了方便，可以预先将训练集中实例间的内积计算出来并保存在矩阵中，即Gram矩阵。<br>\begin{equation}<br>\left(<br>  \begin{array}{ccc}<br>    x_{1} \cdot x_{1} &amp; x_{1}\cdot x_{2} &amp;  …\\<br>   x_{2} \cdot x_{1} &amp; x_{2}\cdot x_{2}  &amp;…\\<br>   …&amp;…&amp;… \\<br>  x_{N} \cdot x_{1} &amp; x_{N}\cdot x_{2}  &amp;…\\<br>  \end{array}<br>\right) _{N\times N}<br>\end{equation}</p>
 
       
     </div>
