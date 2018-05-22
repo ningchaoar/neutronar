@@ -87,24 +87,12 @@
 <meta property="og:site_name" content="neutronar">
 <meta property="og:description" content="第四章 朴素贝叶斯法朴素贝叶斯法（naive Bayes）是基于贝叶斯定理和特征条件独立假设的分类方法。对给定的训练数据集，学习其输入/输出的联合概率分布，然后基于此分布，对给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯定理.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/条件概率分布参数太多.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/连乘.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/朴素贝叶斯表达.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯分类器.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯分类器2.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/期望风险函数.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/期望风险函数最小化.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/极大似然估计1.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/极大似然估计2.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯估计.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯估计2.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯网络.jpg">
-<meta property="og:updated_time" content="2018-05-21T04:35:19.448Z">
+<meta property="og:updated_time" content="2018-05-22T01:57:12.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《统计学习方法》第四章笔记">
 <meta name="twitter:description" content="第四章 朴素贝叶斯法朴素贝叶斯法（naive Bayes）是基于贝叶斯定理和特征条件独立假设的分类方法。对给定的训练数据集，学习其输入/输出的联合概率分布，然后基于此分布，对给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯定理.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/23/统计学习方法第四章笔记/贝叶斯网络.jpg">
 
 
 
@@ -357,12 +345,31 @@
 
       
         <h1 id="第四章-朴素贝叶斯法"><a href="#第四章-朴素贝叶斯法" class="headerlink" title="第四章 朴素贝叶斯法"></a>第四章 朴素贝叶斯法</h1><p>朴素贝叶斯法（naive Bayes）是基于贝叶斯定理和特征条件独立假设的分类方法。<br>对给定的训练数据集，学习其输入/输出的联合概率分布，然后基于此分布，对给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。<br><a id="more"></a><br>先验概率：指根据以往经验，在没有进一步信息和观测的情况下猜测的概率。（在扔骰子前，从直觉上看，扔出6的概率为1/6，这就是先验概率。）<br>后验概率：指在得到某些有用的信息后，事件发生的概率。（看到这个骰子每一面都是6，则扔出6的概率必为1，这就是后验概率，也可以看做是一种条件概率。）</p>
-<h2 id="朴素贝叶斯法的学习与分类"><a href="#朴素贝叶斯法的学习与分类" class="headerlink" title="朴素贝叶斯法的学习与分类"></a>朴素贝叶斯法的学习与分类</h2><h3 id="基本方法："><a href="#基本方法：" class="headerlink" title="基本方法："></a>基本方法：</h3><p>朴素贝叶斯法核心就是贝叶斯定理，即：<br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯定理.jpg" alt="Alt text"><br>朴素贝叶斯法的思路就是，对于一个输入$x$，我们想得到$P(y|x)$。于是，只要把$P(y)$和$P(x)$找出来，再把$P(x|y)$找出来，就可以达到目的了。<br>但在应用时马上就遇到第一个问题：我们所给的输入$x$一般是一个多维的特征向量，而每个特征又有很多可能的取值。这时条件概率$P(x|y)$就变成如下的形式：<br><img src="/2018/03/23/统计学习方法第四章笔记/./条件概率分布参数太多.jpg" alt="Alt text"><br>这个式子中的参数个数为指数级，实际估计难度太大。<br>因此假设样本具有条件独立性（朴素一词得名于此假设），也就是说各个特征彼此是独立的，例如一个人的身高和眼睛的颜色是互相无关的。作出这个假设后，就可以把上面的公式拆成连乘的形式，这样我们一次只需要针对一个特征进行估计就可以了：<br><img src="/2018/03/23/统计学习方法第四章笔记/./连乘.jpg" alt="Alt text"><br>将上式代入贝叶斯公式，同时利用全概率公式，就得到了朴素贝叶斯法的最终表达形式：<br><img src="/2018/03/23/统计学习方法第四章笔记/./朴素贝叶斯表达.jpg" alt="Alt text"><br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯分类器.jpg" alt="Alt text"><br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯分类器2.jpg" alt="Alt text"><br>可以看出，给定输入$x$，朴素贝叶斯法将把$x$分到后验概率最大的类中。</p>
-<h3 id="后验概率最大化"><a href="#后验概率最大化" class="headerlink" title="后验概率最大化:"></a>后验概率最大化:</h3><p>上述的后验概率最大化等价于期望风险最小化。<br>具体地，选择0-1函数为损失函数，则期望风险函数为：<br><img src="/2018/03/23/统计学习方法第四章笔记/./期望风险函数.jpg" alt="Alt text"><br>上式表示，对所有的输入$X$，则分类器的输出$f(x)$在所有分类上产生的误差总和的期望值。要使上式最小化，只需对$X=x$逐个最小化。<br>如下式，求和号内的式子表示输入$X=x$在真实分类为$C_k$时，分类器的输出$y=f(x)$所产生的误差，对真实分类所有的可能取值$k$进行求和，就得到了分类器f在输入值为$X=x$时的总误差。为了让这个总误差最小，就要选择概率最大的那个类作为输出的类。（因为真实类可能是$C_k$中任何一个，总误差$R_{exp}(f)=E_x[L_1P_1+L_2P_2+L_3P_3…+L_kP_k]$中只能有一项为零，其他项都是产生误差的项，因此最好让为零的那一项最大，总误差就会达到最小）<br><img src="/2018/03/23/统计学习方法第四章笔记/./期望风险函数最小化.jpg" alt="Alt text"><br>这就证明了在朴素贝叶斯法中，后验概率最大化的策略等价于期望风险最小化。</p>
-<h2 id="朴素贝叶斯法的参数估计"><a href="#朴素贝叶斯法的参数估计" class="headerlink" title="朴素贝叶斯法的参数估计"></a>朴素贝叶斯法的参数估计</h2><p>上节说到，只要把$P(y)$和$P(x)$找出来，再把$P(x|y)$找出来，就可以达到目的。关键是，样本真实的概率分布是未知的，因此要用某个统计量作为一种真实分布的估计。在朴素贝叶斯法中，用频率作为概率的近似，就是一种极大似然估计。<br><img src="/2018/03/23/统计学习方法第四章笔记/./极大似然估计1.jpg" alt="Alt text"><br><img src="/2018/03/23/统计学习方法第四章笔记/./极大似然估计2.jpg" alt="Alt text"><br>以上即为参数估计的具体表达形式。（$P(x)$由全概率公式得到）</p>
-<h3 id="贝叶斯估计："><a href="#贝叶斯估计：" class="headerlink" title="贝叶斯估计："></a>贝叶斯估计：</h3><p>上述极大似然估计在某些特殊情况下，会导致要估计的概率值为0（概率不为0，频率却可能为0），这就影响了后验概率的计算（注意在朴素贝叶斯法中，条件概率被分解为一个连乘式）。解决这一问题的方法是采用贝叶斯估计。<br>如图为条件概率的贝叶斯估计。贝叶斯估计相当于考虑了待估计量的先验概率。<br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯估计.jpg" alt="Alt text"><br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯估计2.jpg" alt="Alt text"><br>上式中常取$λ=1$，称为拉普拉斯平滑。</p>
-<p>注：朴素贝叶斯假设了条件独立性，若假设条件之间存在概率依存关系，模型就变成了贝叶斯网络。<br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯网络.jpg" alt="Alt text"><br>如图为七个特征的依存关系，则他们的全概率不再是七个概率独立的相乘，而是：<br>$P(x_1,x_2,x_3,x_4,x_5,x_6,x_7)=P(x_1)·P(x_2)·P(x_3)·P(x_4∣x_1,x_2,x_3)·P(x_5∣x_1,x_3)·P(x_6∣x_4)·P(x_7∣x_4,x_5)$</p>
-
+<h2 id="朴素贝叶斯法的学习与分类"><a href="#朴素贝叶斯法的学习与分类" class="headerlink" title="朴素贝叶斯法的学习与分类"></a>朴素贝叶斯法的学习与分类</h2><h3 id="基本方法："><a href="#基本方法：" class="headerlink" title="基本方法："></a>基本方法：</h3><p>朴素贝叶斯法核心就是贝叶斯定理，即：</p>
+<script type="math/tex; mode=display">P(x,y) = P(x\mid y)P(y)=P(y\mid x)p(x)</script><p>朴素贝叶斯法的思路就是，对于一个输入$x$，我们想得到$P(y|x)$。于是，只要把$P(y)$和$P(x)$找出来，再把$P(x|y)$找出来，就可以达到目的了。<br>但在应用时马上就遇到第一个问题：我们所给的输入$x$一般是一个多维的特征向量，而每个特征又有很多可能的取值。这时条件概率$P(x|y)$就变成如下的形式：</p>
+<script type="math/tex; mode=display">P(X=x\mid Y=c_k)=P(X^{(1)}=x^{(1)},...,X^{(n)}=x^{(n)}\mid Y=c_k),\ k=1,2,...,K</script><p>这个式子中的参数个数为指数级，实际估计难度太大。<br>因此假设样本具有条件独立性（朴素一词得名于此假设），也就是说各个特征彼此是独立的，例如一个人的身高和眼睛的颜色是互相无关的。作出这个假设后，就可以把上面的公式拆成连乘的形式，这样我们一次只需要针对一个特征进行估计就可以了：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+P(X=x\mid Y=c_k)&=P(X^{(1)}=x^{(1)},...,X^{(n)}=x^{(n)}\mid Y=c_k)\\
+&=\prod_{j=1}^n P(X^{(j)}=x^{(j)}\mid Y=c_k)
+\end{align*}</script><p>将上式代入贝叶斯公式，同时利用全概率公式，就得到了朴素贝叶斯法的最终表达形式：</p>
+<script type="math/tex; mode=display">P(Y=c_k\mid X=x)=\frac{P(Y=c_k)\prod_j P(X^{(j)}=x^{(j)}\mid Y=c_k)}{\sum_k P(Y=c_k)\prod_j P(X^{(j)}=x^{(j)}\mid Y=c_k)},\ k=1,2,...,K</script><script type="math/tex; mode=display">y=f(x)=\arg \max_{c_k}\frac{P(Y=c_k)\prod_j P(X^{(j)}=x^{(j)}\mid Y=c_k)}{\sum_k P(Y=c_k)\prod_j P(X^{(j)}=x^{(j)}\mid Y=c_k)}</script><script type="math/tex; mode=display">y= \arg \max_{c_k} P(Y=c_k)\prod_{j=1}^n P(X^{(j)}=x^{(j)}\mid Y=c_k</script><p>可以看出，给定输入$x$，朴素贝叶斯法将把$x$分到后验概率最大的类中。</p>
+<h3 id="后验概率最大化"><a href="#后验概率最大化" class="headerlink" title="后验概率最大化:"></a>后验概率最大化:</h3><p>上述的后验概率最大化等价于期望风险最小化。<br>具体地，选择0-1函数为损失函数，则期望风险函数为：</p>
+<script type="math/tex; mode=display">R_{exp}(f)=E_X \sum_{k=1}^K[L(c_k,f(X))]P(c_k\mid X)</script><p>上式表示，对所有的输入$X$，则分类器的输出$f(x)$在所有分类上产生的误差总和的期望值。要使上式最小化，只需对$X=x$逐个最小化。<br>如下式，求和号内的式子表示输入$X=x$在真实分类为$C_k$时，分类器的输出$y=f(x)$所产生的误差，对真实分类所有的可能取值$k$进行求和，就得到了分类器f在输入值为$X=x$时的总误差。为了让这个总误差最小，就要选择概率最大的那个类作为输出的类。（因为真实类可能是$C_k$中任何一个，总误差$R_{exp}(f)=E_x[L_1P_1+L_2P_2+L_3P_3…+L_kP_k]$中只能有一项为零，其他项都是产生误差的项，因此最好让为零的那一项最大，总误差就会达到最小）</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+f(x)&=\arg \min_{y\in \mathcal Y}\sum_{k=1}^K L(c_k,y)P(c_k\mid X=x)\\
+&=\arg \min_{y\in \mathcal Y}\sum_{k=1}^KP(Y\ne c_k\mid X=x)\\
+&=\arg \min_{y\in \mathcal Y}(1-P(Y=c_k\mid X=x))\\
+&=\arg \max_{y\in \mathcal Y}P(Y=c_k\mid X=x)
+\end{align*}</script><p>这就证明了在朴素贝叶斯法中，后验概率最大化的策略等价于期望风险最小化。</p>
+<h2 id="朴素贝叶斯法的参数估计"><a href="#朴素贝叶斯法的参数估计" class="headerlink" title="朴素贝叶斯法的参数估计"></a>朴素贝叶斯法的参数估计</h2><p>上节说到，只要把$P(y)$和$P(x)$找出来，再把$P(x|y)$找出来，就可以达到目的。关键是，样本真实的概率分布是未知的，因此要用某个统计量作为一种真实分布的估计。在朴素贝叶斯法中，用频率作为概率的近似，就是一种极大似然估计。</p>
+<script type="math/tex; mode=display">P(Y=c_k)=\frac{\sum\limits_{i=1}^NI(y_i=c_k)}{N},\ k=1,2,...,K</script><script type="math/tex; mode=display">P(X^{(j)}=a_{jl}\mid Y=c_k)=\frac{\sum\limits_{i=1}^NI(x_i^{(j)}=a_{jl}, y_i=c_k)}{\sum\limits_{i=1}^NI( y_i=c_k)}</script><script type="math/tex; mode=display">j=1,2,...,n;\ l=1,2,...S_j;\ k=1,2,...K</script><p>以上即为参数估计的具体表达形式。（$P(x)$由全概率公式得到）</p>
+<h3 id="贝叶斯估计："><a href="#贝叶斯估计：" class="headerlink" title="贝叶斯估计："></a>贝叶斯估计：</h3><p>上述极大似然估计在某些特殊情况下，会导致要估计的概率值为0（概率不为0，频率却可能为0），这就影响了后验概率的计算（注意在朴素贝叶斯法中，条件概率被分解为一个连乘式）。解决这一问题的方法是采用贝叶斯估计。<br>如图为条件概率的贝叶斯估计。贝叶斯估计相当于考虑了待估计量的先验概率。</p>
+<script type="math/tex; mode=display">P_{\lambda}(X^{(j)}=a_{jl}\mid Y=c_k)=\frac{\sum\limits_{i=1}^NI(x_i^{(j)}=a_{jl}, y_i=c_k)+\lambda}{\sum\limits_{i=1}^NI( y_i=c_k)+S_j\lambda}</script><script type="math/tex; mode=display">P_{\lambda}(Y=c_k)=\frac{\sum\limits_{i=1}^NI(y_i=c_k)+\lambda}{N+K\lambda}</script><p>上式中常取$λ=1$，称为拉普拉斯平滑。</p>
+<p>注：朴素贝叶斯假设了条件独立性，若假设条件之间存在概率依存关系，模型就变成了贝叶斯网络。<br><img src="/2018/03/23/统计学习方法第四章笔记/./贝叶斯网络.jpg" alt="Alt text"><br>如图为七个特征的依存关系，则他们的全概率不再是七个概率独立的相乘，而是：</p>
+<script type="math/tex; mode=display">P(x_1,x_2,x_3,x_4,x_5,x_6,x_7)=\\ 
+P(x_1)·P(x_2)·P(x_3)·P(x_4∣x_1,x_2,x_3)·P(x_5∣x_1,x_3)·P(x_6∣x_4)·P(x_7∣x_4,x_5)</script>
       
     </div>
     
