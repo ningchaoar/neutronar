@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,统计学习方法," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="支持向量机概述《机器学习》第六章&amp;amp;《统计学习方法》第七章都介绍了支持向量机，从写作风格来看，前者更便于初学者理解，后者作为复习资料更好，本笔记以后者为主，采用自问自答的形式展开对SVM的学习。">
+<meta name="keywords" content="机器学习,统计学习方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="支持向量机学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/04/09/支持向量机笔记/index.html">
+<meta property="og:site_name" content="neutronar">
+<meta property="og:description" content="支持向量机概述《机器学习》第六章&amp;amp;《统计学习方法》第七章都介绍了支持向量机，从写作风格来看，前者更便于初学者理解，后者作为复习资料更好，本笔记以后者为主，采用自问自答的形式展开对SVM的学习。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/09/支持向量机笔记/支持向量.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/09/支持向量机笔记/软间隔.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/09/支持向量机笔记/hinge损失函数.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/09/支持向量机笔记/映射.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/09/支持向量机笔记/常见核函数.png">
+<meta property="og:updated_time" content="2018-05-23T05:56:29.107Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="支持向量机学习笔记">
+<meta name="twitter:description" content="支持向量机概述《机器学习》第六章&amp;amp;《统计学习方法》第七章都介绍了支持向量机，从写作风格来看，前者更便于初学者理解，后者作为复习资料更好，本笔记以后者为主，采用自问自答的形式展开对SVM的学习。">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/09/支持向量机笔记/支持向量.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/09/支持向量机笔记/"/>
+
+
+
+
+
+  <title>支持向量机学习笔记 | neutronar</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">neutronar</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个普通学生的学习笔记</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/09/支持向量机笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="neutronar">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/mountain.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="neutronar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">支持向量机学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-09T00:00:00+08:00">
+                2018-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="支持向量机概述"><a href="#支持向量机概述" class="headerlink" title="支持向量机概述"></a>支持向量机概述</h1><p>《机器学习》第六章&amp;《统计学习方法》第七章都介绍了支持向量机，从写作风格来看，前者更便于初学者理解，后者作为复习资料更好，本笔记以后者为主，采用自问自答的形式展开对SVM的学习。<br><a id="more"></a></p>
+<h2 id="支持向量机是做什么的？"><a href="#支持向量机是做什么的？" class="headerlink" title="支持向量机是做什么的？"></a>支持向量机是做什么的？</h2><p>答：支持向量机（support vector machines，SVM）是一种二类分类及回归（组合以实现多类分类）模型，它的<strong>基本模型是定义在特征空间上</strong>（所有模型都定义在特征空间上，p4）<strong>的间隔最大</strong>（因此区别于感知机）<strong>的线性分类器</strong>。通过运用核技巧，可以使SVM成为本质上的非线性模型。（核技巧是一种机器学习方法，后面会介绍）。</p>
+<h2 id="支持向量一词怎么来的呢？"><a href="#支持向量一词怎么来的呢？" class="headerlink" title="支持向量一词怎么来的呢？"></a>支持向量一词怎么来的呢？</h2><p>答：是因为经过学习后，SVM模型参数仅由训练数据集中少数的几个关键样本决定，也就是说只要保留这些关键样本，就可以复现该SVM模型。我们知道样本就是一些特征向量的集合，所以就把这些<strong>起决定性作用的样本称为支持向量</strong>，就好像这几个样本将模型支撑着一样。</p>
+<h2 id="为什么SVM具有这样的特点？"><a href="#为什么SVM具有这样的特点？" class="headerlink" title="为什么SVM具有这样的特点？"></a>为什么SVM具有这样的特点？</h2><p>答：我们知道感知机是多解的，因为感知机学习的目标函数是“最小化误分类点到超平面的距离之和”，当分类完成时，误分类点的数目为零，目标函数自然达到最小化，学习也就停止了。而SVM更进一步，<strong>选择“最大化间隔”作为目标函数</strong>，就是说不仅要分类正确，还要选择一个“间隔最大”的超平面。这时解就是唯一的了，而且这个解只与决定间隔大小的那些支持向量有关。</p>
+<h1 id="细节与理解"><a href="#细节与理解" class="headerlink" title="细节与理解"></a>细节与理解</h1><p>目前，我们对支持向量机已经有了一个初步的印象。下面继续以问答的形式，对一些细节做展开。</p>
+<h2 id="间隔最大是什么意思？"><a href="#间隔最大是什么意思？" class="headerlink" title="间隔最大是什么意思？"></a>间隔最大是什么意思？</h2><p>答：以二维特征空间为例，感知机就是特征空间中一条没有宽度的直线，这条直线将线性可分的样本分开。而SVM则是一条有宽度的直线，这个宽度就是所谓的“间隔”。间隔最大就是说要找到一条最粗的直线来把正负类样本划分开，在特征空间中，这样的直线是存在且唯一的（证明见《统计学习方法》p101）。直观上，样本距离超平面越远，说明划分的可信度越高，间隔最大就是保证所有的样本到超平面的距离都大于等于间隔的一半。</p>
+<h2 id="怎么计算间隔大小？"><a href="#怎么计算间隔大小？" class="headerlink" title="怎么计算间隔大小？"></a>怎么计算间隔大小？</h2><p>答：为了说明间隔，首先要说明距离的意义：<br>假设超平面的方程为$f(x) = w\cdot x+b$，那么点$A(x，y)$到超平面的距离为：</p>
+<script type="math/tex; mode=display">r=\frac{\lvert w^Tx+b\rvert}{\lVert w\rVert}</script><p>这就是点A到超平面的欧式几何距离。其中分子称为函数距离，因为对于确定超平面，分母的值是固定的，只要比较分子就能知道孰近孰远。<br><img src="/2018/04/09/支持向量机笔记/./支持向量.png" alt="Alt text"><br>如上图所示，SVM那条线的粗细是由三个样本所决定的，这三个样本就称为特征向量。特征向量到超平面的几何距离，就称为间隔。对应的，间隔也有几何间隔和函数间隔，SVM的学习就是最大化几何间隔。为什么不用函数间隔呢？因为如果将特征空间与超平面成比例的缩放，函数间隔也会相应变化，但几何间隔是不会变的。</p>
+<blockquote>
+<p><strong>定义7.2 （函数间隔）</strong> 对于给定的训练数据集$T$和超平面$(w,b)$，定义超平面$(w,b)$关于样本点$(x_i,y_i)$的函数间隔为</p>
+<script type="math/tex; mode=display">\hat{\gamma}_i=y_i(w\cdot x_i+b)</script><p><strong>定义7.3 （几何间隔）</strong> 对于给定的训练数据集$T$和超平面$(w,b)$，定义超平面$(w,b)$关于样本点$(x_i,y_i)$的几何间隔为</p>
+<script type="math/tex; mode=display">\gamma_i=y_i\left( \frac{w}{\lVert w\rVert } \cdot x_i+\frac{b}{\lVert w\rVert}\right)</script><p>定义超平面$(w,b)$关于训练数据集$T$的几何间隔为超平面$(w,b)$关于$T$中所有样本点的几何间隔最小值，即</p>
+<script type="math/tex; mode=display">\gamma = \min_{i=1,...,N}\gamma_i</script><p>超平面$(w,b)$关于样本点$(x_i,y_i)$的几何间隔一般是实例点到超平面的带符号的距离。当样本点被超平面正确分类时，就是实例点到超平面的距离。</p>
+</blockquote>
+<p>定义7.2与7.3中式子前面乘以y，可以用来判断分类是否正确（如不正确则两者异号）。</p>
+<h2 id="怎样利用最大化间隔进行SVM的学习？"><a href="#怎样利用最大化间隔进行SVM的学习？" class="headerlink" title="怎样利用最大化间隔进行SVM的学习？"></a>怎样利用最大化间隔进行SVM的学习？</h2><p>上面已经导出了间隔的计算式，于是SVM的学习就可以表示为下面的约束最优化问题：</p>
+<blockquote>
+<script type="math/tex; mode=display">
+\begin{align}
+&\max_{w,b} \gamma \tag{7.9}\\
+&\rm {s.t.} \quad y_i\left(\frac{w}{\lVert w\rVert}\cdot x_i+\frac{b}{\lVert w\rVert}\right)\geqslant \gamma, \ i=1,2,...,N \tag{7.10}
+\end{align}</script><p>即我们希望最大化超平面$(w,b)$关于训练数据集的几何间隔$\gamma$，约束条件表示的是超平面$(w,b)$关于每个训练样本点的几何间隔至少是$\gamma$。<br>考虑几何间隔和函数间隔的关系式$\gamma = \tfrac{\hat{\gamma}}{\lVert w\rVert}$，可将这个问题改写为</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\max_{w,b}\frac{\hat{\gamma}}{\lVert w\rVert} \tag{7.11}\\
+&\rm {s.t.} \quad y_i\left(w\cdot x_i+b\right)\geqslant \hat{\gamma}, \ i=1,2,...,N \tag{7.12}
+\end{align}</script><p>函数间隔$\hat{\gamma}$的取值并不影响最优化问题的解。事实上，假设将$w$和$b$按比例改变为$\lambda w$和$\lambda b$，这时函数间隔成为$\lambda \hat{\gamma}$。函数间隔的这一改变对上面最优化问题的不等式约束没有影响，对目标函数的优化也没有影响，也就是说，它产生一个等价的最优化问题。这样，就可以取$\hat{\gamma}=1$。将$\hat{\gamma}=1$代入上面的最优化问题，注意到最大化$\dfrac{1}{\lVert w\rVert}$和最小化$\dfrac{1}{2}\lVert w\rVert^2$是等价的，于是就得到下面的线性可分支持向量机学习的最优化问题</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\min_{w,b}\frac{1}{2} \lVert w\rVert^2 \tag{7.13}\\
+&\rm {s.t.} \quad y_i\left(w\cdot x_i+b\right)-1 \geqslant 0, \ i=1,2,...,N \tag{7.14}
+\end{align}</script></blockquote>
+<p>7.13式为最大几何间隔条件，7.14式为分类正确条件（且每个样本的函数间隔$ \hat{\gamma }\geqslant 1$，几何间隔$\gamma \geqslant \dfrac{1}{\lVert w\rVert}$。</p>
+<h2 id="如何求解上述最优化问题？"><a href="#如何求解上述最优化问题？" class="headerlink" title="如何求解上述最优化问题？"></a>如何求解上述最优化问题？</h2><p>①首先根据7.13及7.14写出拉格朗日函数：</p>
+<script type="math/tex; mode=display">L(w,b,\alpha)=\frac{1}{2}\lVert w\rVert^2+\sum_{i=1}^m \alpha_i\left(1-y_i(w^T x_i+b)\right)</script><p>②原始问题为：</p>
+<script type="math/tex; mode=display">\min_{w,b}\max_{\alpha}L(w,b,\alpha)</script><p>③根据拉格朗日对偶性，原始问题转化为对偶问题的极大极小问题：</p>
+<script type="math/tex; mode=display">\max_{\alpha}\min_{w,b}L(w,b,\alpha)</script><p>④先求内部的极小问题，对L(w,b,α)求偏导并令偏导等于零，可以解得：</p>
+<script type="math/tex; mode=display">w^*=\sum_{i=1}^m\alpha_iy_ix_i,\ 0=\sum_{i=1}^m\alpha_iy_i</script><p>⑤然后再求外层解：</p>
+<script type="math/tex; mode=display">\max_\alpha L(w^*,b^*,\alpha)=\max_{\alpha}\sum_{i=1}^m \alpha_i-\frac{1}{2}\sum_{i=1}^m\sum_{j=1}^m\alpha_i\alpha_jy_iy_jx^T_ix_j \tag{6.11}</script><p>⑥解出α后代入w就得到了SVM模型：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+f(x)&=w^Tx+b\\
+&=\sum_{i=1}^m\alpha_iy_ix^T_ix+b
+\end{align*} \tag{6.12}</script><p><strong>注释1</strong>：在①中，由于存在不等式约束，因此上述过程满足KKT条件：<br>\begin{equation}<br>\left\{<br>             \begin{array}{lr}<br>             \alpha_i \geqslant 0 ; \\<br>             y_if(x_i)-1 \geqslant 0\\<br>             \alpha_i(y_if(x_i)-1)=0<br>             \end{array}<br>\right. \tag{6.13}<br>\end{equation}</p>
+<p>于是，对于任意训练样本$(x_i,y_i)$，总有$\alpha_i=0$或$y_if(x_i)=1$。若$\alpha_i=0$，则该样本将不会在式(6.12)的求和中出现，也就不会对$f(x)$有任何影响；若$\alpha_i &gt;0$，则必有$y_if(x_i)=1$，所对应的样本点位于最大间隔边界上，是一个支持向量。这显示出支持向量的一个重要性质：训练完成后，大部分的训练样本都不需要保留，最终模型仅与支持向量有关。</p>
+<p><strong>注释2</strong>：在⑤中，可以运用序列最小最优化（SMO）算法进行高效求解。</p>
+<blockquote>
+<p>SMO的基本思路是先固定$\alpha_i$之外的所有参数，然后求 $\alpha_i$上的极值。由于存在约束$\sum_{i=1}^m\alpha_iy_i=0$，若固定$\alpha_i$之外的其他变量，则$\alpha_i$可由其他变量导出。于是SMO每次选择两个变量$\alpha_i$和$\alpha_j$，并固定其他参数。这样，在参数初始化后，SMO不断执行如下两个步骤直至收敛：<br>1.选取一对需更新的变量$\alpha_i$和$\alpha_j;$<br>2.固定$\alpha_i$和$\alpha_j$以外的参数，求解式(6.11)以获得更新后的$\alpha_i$和$\alpha_j$。<br>注意到只需选取的$\alpha_i$和$\alpha_j$中有一个不满足KKT条件，目标函数就会在迭代之后增大。直观来看，KKT条件违背的程度越大，则变量更新后可能导致的目标函数值增幅越大。于是，SMO先选取违背KKT条件程度最大的变量。并启发式地选择与其间隔最大的第二个变量，这样的两个变量具有较大差别，对它们进行更新会给目标函数值带来更大的变化。</p>
+</blockquote>
+<p><strong>注释3</strong>：⑥中如何确定偏离量b呢？</p>
+<blockquote>
+<p>注意到，对任意支持向量$(x_s,y_s)$都有$y_sf(x_s)=1$，即</p>
+<script type="math/tex; mode=display">y_s\left( \sum_{i\in S}\alpha_iy_ix^T_ix_s+b\right)=1 \tag{6.17}</script><p>其中，$S=\{i\mid \alpha_i&gt;0,i=1,2,…,m\}$为所有支持向量的下表集。理论上，可选取任意支持向量并通过求解式(6.17)获得$b$，但现实中常采用一种容错性更高的做法：使用所有支持向量求解的平均值</p>
+<script type="math/tex; mode=display">b=\frac{1}{\lvert S\rvert}\sum_{s\in S}\left(y_s-\sum_{i\in S}\alpha_iy_ix^T_ix_s\right) \tag{6.18}</script></blockquote>
+<h2 id="如果样本不是线性可分的，还能应用SVM吗？"><a href="#如果样本不是线性可分的，还能应用SVM吗？" class="headerlink" title="如果样本不是线性可分的，还能应用SVM吗？"></a>如果样本不是线性可分的，还能应用SVM吗？</h2><p>一开始我们提到，SVM是一个线性分类模型，如果样本是线性不可分的该怎么办？<br>有两种方法，假如样本是近似线性可分的，则可以用软间隔方法（同时可以防止过拟合）。假如样本是完全线性不可分的（比如异或问题），则可以用核技巧。<br><strong>软间隔方法：</strong><br>如图所示，软间隔方法就是允许有一定的样本在间隔之内，即允许SVM在一些样本上出错。<br><img src="/2018/04/09/支持向量机笔记/./软间隔.png" alt="Alt text"><br>如何实现软间隔呢？可以对①中的目标函数略加修改：</p>
+<blockquote>
+<p>允许某些样本不满足约束</p>
+<script type="math/tex; mode=display">y_i(w^Tx_i+b)\geqslant 1</script><p>当然，在最大化间隔的同时，不满足约束的样本应该尽可能少。于是，优化目标可以写为</p>
+<script type="math/tex; mode=display">\min_{w,b}\frac{1}{2}\lVert w \rVert^2+C\sum_{i=1}^m\mathscr l_{0/1}\left(y_i(w^Tx_i+b)-1\right)</script><p>其中$C&gt;0$是一个常数，$\mathscr l_{0/1}$是0-1损失函数。</p>
+</blockquote>
+<p>实际中，往往采用数学性质更优的hinge损失函数:<br><img src="/2018/04/09/支持向量机笔记/./hinge损失函数.png" alt="Alt text"></p>
+<p><strong>核技巧：</strong><br>如图，低维特征空间中线性不可分的问题，可以映射到高维特征空间，使得样本在这个特征空间中线性可分。<br><img src="/2018/04/09/支持向量机笔记/./映射.png" alt="Alt text"><br>核技巧和核函数就是用来做这个的，由于涉及较深的数学推导，想要真正理解，还是去看书上的公式是最有效的，这里就不再贴原文了。（《机器学习》p126-p129）</p>
+<p>常见核函数：<br><img src="/2018/04/09/支持向量机笔记/./常见核函数.png" alt="Alt text"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/统计学习方法/" rel="tag"># 统计学习方法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/27/机器学习第五章笔记/" rel="next" title="《机器学习》第五章笔记">
+                <i class="fa fa-chevron-left"></i> 《机器学习》第五章笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/mountain.jpg"
+                alt="neutronar" />
+            
+              <p class="site-author-name" itemprop="name">neutronar</p>
+              <p class="site-description motion-element" itemprop="description">Another Mountain.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#支持向量机概述"><span class="nav-number">1.</span> <span class="nav-text">支持向量机概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#支持向量机是做什么的？"><span class="nav-number">1.1.</span> <span class="nav-text">支持向量机是做什么的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持向量一词怎么来的呢？"><span class="nav-number">1.2.</span> <span class="nav-text">支持向量一词怎么来的呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么SVM具有这样的特点？"><span class="nav-number">1.3.</span> <span class="nav-text">为什么SVM具有这样的特点？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#细节与理解"><span class="nav-number">2.</span> <span class="nav-text">细节与理解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#间隔最大是什么意思？"><span class="nav-number">2.1.</span> <span class="nav-text">间隔最大是什么意思？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么计算间隔大小？"><span class="nav-number">2.2.</span> <span class="nav-text">怎么计算间隔大小？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎样利用最大化间隔进行SVM的学习？"><span class="nav-number">2.3.</span> <span class="nav-text">怎样利用最大化间隔进行SVM的学习？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何求解上述最优化问题？"><span class="nav-number">2.4.</span> <span class="nav-text">如何求解上述最优化问题？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果样本不是线性可分的，还能应用SVM吗？"><span class="nav-number">2.5.</span> <span class="nav-text">如果样本不是线性可分的，还能应用SVM吗？</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">neutronar</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
