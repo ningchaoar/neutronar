@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="neutronar">
 <meta property="og:description" content="aenet介绍anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，根据电子结构计算的结果，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子动力学和">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-24T09:09:37.276Z">
+<meta property="og:updated_time" content="2018-05-24T14:09:34.612Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AENET的安装及基本概念">
 <meta name="twitter:description" content="aenet介绍anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，根据电子结构计算的结果，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子动力学和">
@@ -392,6 +392,12 @@
 <li>对ANN进行训练。</li>
 </ol>
 <p><strong>模拟</strong>是指使用已经训练好的ANN对材料的能量进行计算模拟（aenetLib）。</p>
+<p><strong>在构建与模拟的整个过程中，必须解决以下三个关键问题：</strong></p>
+<ul>
+<li>如何得到高质量的结构集?</li>
+<li>如何选择descriptor及其参数？</li>
+<li>如何选择神经网络的优化算法及超参数？ </li>
+</ul>
 <h2 id="ANN势的构建"><a href="#ANN势的构建" class="headerlink" title="ANN势的构建"></a>ANN势的构建</h2><p>ANN势的构建是通过对参考数据集中结构能的插值完成的。数据集中的结构格式参考本章第1节——<strong>数据集</strong>。</p>
 <p>为了在模拟计算中获得更高的泛用性，ANN势必须满足旋转、平移对称性以及交换等价原子的对称性。因此，原子的坐标必须用满足上述要求的基(basis)表示。具体介绍详见本章第2节——<strong>不变量坐标（invariant-basis）</strong>。</p>
 <p>从直角坐标到不变量坐标的转换由generate.x完成，具体详见本章第3节——<strong>generate.x</strong>。</p>
