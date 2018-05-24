@@ -82,14 +82,14 @@
 <meta name="description" content="何为aenet?anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，根据电子结构计算的结果，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子动力学">
 <meta name="keywords" content="AENET,神经网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AENET">
-<meta property="og:url" content="http://yoursite.com/2018/05/23/AENET/index.html">
+<meta property="og:title" content="AENET的安装与基本概念">
+<meta property="og:url" content="http://yoursite.com/2018/05/23/AENET的安装与基本概念/index.html">
 <meta property="og:site_name" content="neutronar">
 <meta property="og:description" content="何为aenet?anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，根据电子结构计算的结果，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子动力学">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-24T04:00:08.127Z">
+<meta property="og:updated_time" content="2018-05-24T04:07:01.507Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AENET">
+<meta name="twitter:title" content="AENET的安装与基本概念">
 <meta name="twitter:description" content="何为aenet?anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，根据电子结构计算的结果，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子动力学">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/23/AENET/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/23/AENET的安装与基本概念/"/>
 
 
 
 
 
-  <title>AENET | neutronar</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>AENET的安装与基本概念 | neutronar</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/AENET/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/AENET的安装与基本概念/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="neutronar">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AENET</h1>
+          <h1 class="post-title" itemprop="name headline">AENET的安装与基本概念</h1>
         
 
         <div class="post-meta">
@@ -347,7 +347,7 @@
 <p><strong>注释【1】：</strong>插值法：根据目标函数在某区间上若干个函数值，求得一个光滑、简单的插值函数，作为目标函数的近似表达式。材料的结构与能量之间一定存在一个复杂的函数关系（结构能），aenet完成的工作就是构建了一个神经网络，这个神经网络就可以看做结构能的插值函数。</p>
 </blockquote>
 <h1 id="安装aenet"><a href="#安装aenet" class="headerlink" title="安装aenet"></a>安装aenet</h1><p>aenet的核心部分由Fortran编写，因此需要先准备好gcc、gfortran编译器。</p>
-<h2 id="依赖包："><a href="#依赖包：" class="headerlink" title="依赖包："></a>依赖包：</h2><ol>
+<h2 id="依赖包"><a href="#依赖包" class="headerlink" title="依赖包"></a>依赖包</h2><ol>
 <li>BLAS (Basic Linear Algebra Subprograms),</li>
 <li>LAPACK (Linear Algebra PACKage),</li>
 <li>L-BFGS-B optimization routines by Nocedal et al.</li>
@@ -355,7 +355,7 @@
 <p>实际上，前两个包一般的服务器上都会有（如果你在个人电脑上安装，请到<a href="http://www.netlib.org/" target="_blank" rel="noopener">官网</a>下载所需文件，并参考该博客进行安装）。</p>
 <p>而第三个包则集成在aenet的安装包中，同时使用aenet必须引用L-BFGS-B的原始论文：<br>R. H. Byrd, P. Lu and J. Nocedal, SIAM J. Sci. Stat. Comp. 16 (1995) 1190-1208.</p>
 <p>另外，aenet提供了许多Python脚本，为了使用这些脚本，需要的第三方库是NumPy与<a href="https://wiki.fysik.dtu.dk/ase/" target="_blank" rel="noopener">Atomic simulation Environment</a></p>
-<h2 id="安装流程："><a href="#安装流程：" class="headerlink" title="安装流程："></a>安装流程：</h2><p>下面以一台Ubuntu系统的个人电脑上的安装为例：<br>（注意，整个安装过程中不要更换编译器的版本）</p>
+<h2 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h2><p>下面以一台Ubuntu系统的个人电脑上的安装为例：<br>（注意，整个安装过程中不要更换编译器的版本）</p>
 <blockquote>
 <p><strong>一、安装BLAS与LAPACK</strong></p>
 <ol>
@@ -365,7 +365,7 @@
 <li>从<code>./INSTALL</code>目录中选择合适的make文件，对于Ubuntu系统，使用默认的即可。<br><code>$ cp LAPACK/make.inc.example LAPACK/make.inc</code></li>
 <li>进行编译<br><code>$sudo make</code></li>
 <li>经过漫长的等待，将得到如下文件<br><code>liblapack.a</code> ,<code>librefblas.a</code> , <code>libtmglib.a</code></li>
-<li>将生成的<em>.a文件复制到系统的库目录中<br>`$sudo cp </em>.a /usr/lib`</li>
+<li>将生成的<em>.a文件复制到系统的库目录中<br>`$ sudo cp </em>.a /usr/lib`</li>
 <li>使用时，三个库对应的命令为<br><code>-lapack</code>,<code>-refblas</code>和<code>-tmglib</code></li>
 </ol>
 <p><strong>二、安装L-BFGS-B</strong></p>
@@ -581,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#何为aenet"><span class="nav-number">1.</span> <span class="nav-text">何为aenet?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装aenet"><span class="nav-number">2.</span> <span class="nav-text">安装aenet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖包："><span class="nav-number">2.1.</span> <span class="nav-text">依赖包：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装流程："><span class="nav-number">2.2.</span> <span class="nav-text">安装流程：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ANN势的构建"><span class="nav-number">3.1.</span> <span class="nav-text">ANN势的构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据集"><span class="nav-number">3.1.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不变量坐标"><span class="nav-number">3.1.2.</span> <span class="nav-text">不变量坐标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generate-x"><span class="nav-number">3.1.3.</span> <span class="nav-text">generate.x</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#train-x"><span class="nav-number">3.1.4.</span> <span class="nav-text">train.x</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#何为aenet"><span class="nav-number">1.</span> <span class="nav-text">何为aenet?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装aenet"><span class="nav-number">2.</span> <span class="nav-text">安装aenet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖包"><span class="nav-number">2.1.</span> <span class="nav-text">依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装流程"><span class="nav-number">2.2.</span> <span class="nav-text">安装流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ANN势的构建"><span class="nav-number">3.1.</span> <span class="nav-text">ANN势的构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据集"><span class="nav-number">3.1.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不变量坐标"><span class="nav-number">3.1.2.</span> <span class="nav-text">不变量坐标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generate-x"><span class="nav-number">3.1.3.</span> <span class="nav-text">generate.x</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#train-x"><span class="nav-number">3.1.4.</span> <span class="nav-text">train.x</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
