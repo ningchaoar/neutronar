@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="neutronar">
 <meta property="og:description" content="aenet介绍anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，根据电子结构计算的结果，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子动力学和">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-29T03:01:04.313Z">
+<meta property="og:updated_time" content="2018-05-31T12:53:33.044Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AENET的安装及基本概念">
 <meta name="twitter:description" content="aenet介绍anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，根据电子结构计算的结果，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子动力学和">
@@ -445,7 +445,7 @@
 <p>训练结束后，打开<code>train.out</code>文件，可以看到其中有这样一部分内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">------------------------------------------------------</span><br><span class="line">               Training set normalization                      </span><br><span class="line">------------------------------------------------------</span><br><span class="line"></span><br><span class="line"> The training set will be normalized now.  Depending on its size this</span><br><span class="line"> process can take a while.  The normalized data set will be written to</span><br><span class="line"> another file. Load that file in future to avoid this step.</span><br><span class="line"></span><br><span class="line"> Name of the new training set file: TiO.train.scaled</span><br><span class="line"></span><br><span class="line"> The network output energy will be normalized to the interval [-1,1].</span><br><span class="line">   Energy scaling factor: f = 1.156976</span><br><span class="line">   Atomic energy shift  : s = 0.135678</span><br><span class="line"></span><br><span class="line"> 1118 high-energy structures will be removed from the scaled training set.</span><br><span class="line"></span><br><span class="line"> Training set normalization done.</span><br></pre></td></tr></table></figure></p>
 <p>也就是说，在进行训练之前，aenet对结构集的 $\rm E/atom$（见上节）行了归一化处理$\rm Ref(eV) = (E/atom - s)*N$，其中$\rm Ref(eV)$即为实际训练中ANN需要学习的能量。这样的归一化处理并无物理意义，作用是为了降低训练集的方差，提高算法收敛速度。<br>如果在<code>train.in</code>中设置了<code>SAVE_ENERGIES</code>标签，训练结束后得到的<code>energies.train/test.xxx</code>文件中，可以看到每一个结构的$\rm Ref(eV)$和$\rm ANN(eV)$</p>
 <h2 id="ANN势的应用"><a href="#ANN势的应用" class="headerlink" title="ANN势的应用"></a>ANN势的应用</h2><p>完成ANN的训练后，可以使用<code>predict.x</code>对结构的能量进行计算。</p>
-<h3 id="predict-x"><a href="#predict-x" class="headerlink" title="predict.x"></a>predict.x</h3><p>首先需要准备<code>predict.in</code>文件，格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">TYPES        !给出原子种类</span><br><span class="line">2</span><br><span class="line">Ti</span><br><span class="line">O</span><br><span class="line"></span><br><span class="line">NETWORKS     !train步骤中得到的神经网络的路径</span><br><span class="line">  Ti Ti.10tw-10tw.ann</span><br><span class="line">  O  O.10tw-10tw.ann</span><br><span class="line"></span><br><span class="line">FORCES       !是否计算原子受力</span><br><span class="line"></span><br><span class="line">FILES        !输入结构文件的路径，用于批量计算，也可以用参数的方式传入单个结构</span><br><span class="line">5           </span><br><span class="line">structure0001.xsf</span><br><span class="line">structure0002.xsf</span><br><span class="line">structure0003.xsf</span><br><span class="line">structure0004.xsf</span><br><span class="line">structure0005.xsf</span><br><span class="line">``` </span><br><span class="line">命令行输入：</span><br><span class="line">`$ predict.x predict.in &gt; predict.out`</span><br><span class="line">或（手动传入结构文件）：</span><br><span class="line">`$ predict.x predict.in &lt;structure.xsf&gt;`</span><br><span class="line"></span><br><span class="line">在输出的结果中，给出了两个能量：</span><br><span class="line">```text</span><br><span class="line"> Cohesive energy            :          -15.63580395 eV</span><br><span class="line"> Total energy               :       -19960.74538563 eV</span><br></pre></td></tr></table></figure></p>
+<h3 id="predict-x"><a href="#predict-x" class="headerlink" title="predict.x"></a>predict.x</h3><p>首先需要准备<code>predict.in</code>文件，格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">TYPES        !给出原子种类</span><br><span class="line">2</span><br><span class="line">Ti</span><br><span class="line">O</span><br><span class="line"></span><br><span class="line">NETWORKS     !train步骤中得到的神经网络的路径</span><br><span class="line">  Ti Ti.10tw-10tw.ann</span><br><span class="line">  O  O.10tw-10tw.ann</span><br><span class="line"></span><br><span class="line">FORCES       !是否计算原子受力</span><br><span class="line"></span><br><span class="line">FILES        !输入结构文件的路径，用于批量计算，也可以用参数的方式传入单个结构</span><br><span class="line">5           </span><br><span class="line">structure0001.xsf</span><br><span class="line">structure0002.xsf</span><br><span class="line">structure0003.xsf</span><br><span class="line">structure0004.xsf</span><br><span class="line">structure0005.xsf</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">命令行输入：</span><br><span class="line">`$ predict.x predict.in &gt; predict.out`</span><br><span class="line">或（手动传入结构文件）：</span><br><span class="line">`$ predict.x predict.in &lt;structure.xsf&gt;`</span><br><span class="line"></span><br><span class="line">在输出的结果中，给出了两个能量：</span><br><span class="line"></span><br><span class="line">```text</span><br><span class="line"> Cohesive energy            :          -15.63580395 eV</span><br><span class="line"> Total energy               :       -19960.74538563 eV</span><br></pre></td></tr></table></figure></p>
 <p>其中$\rm Cohesive\ energy$的计算方法与 $\rm E/atom$一样。</p>
 <p>至此，AENET的使用流程全部展示完毕。<br><strong>在实际应用的时候，必须解决以下三个关键问题：</strong></p>
 <ul>
@@ -485,8 +485,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/09/支持向量机笔记/" rel="next" title="支持向量机学习笔记">
-                <i class="fa fa-chevron-left"></i> 支持向量机学习笔记
+              <a href="/2018/05/07/NumPy学习笔记-1/" rel="next" title="NumPy学习笔记-1">
+                <i class="fa fa-chevron-left"></i> NumPy学习笔记-1
               </a>
             
           </div>
@@ -574,7 +574,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -585,7 +585,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -596,7 +596,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
