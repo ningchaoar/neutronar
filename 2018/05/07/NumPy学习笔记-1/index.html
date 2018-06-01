@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Python," />
+  <meta name="keywords" content="Python,NumPy," />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="笔记1是NumPy的背景和基础知识等，主要资料来源为：Numpy v1.14 Manual，官网Quickstart tutorial和一些中文博客。">
-<meta name="keywords" content="Python">
+<meta name="keywords" content="Python,NumPy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NumPy学习笔记-1">
 <meta property="og:url" content="http://yoursite.com/2018/05/07/NumPy学习笔记-1/index.html">
 <meta property="og:site_name" content="neutronar">
 <meta property="og:description" content="笔记1是NumPy的背景和基础知识等，主要资料来源为：Numpy v1.14 Manual，官网Quickstart tutorial和一些中文博客。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-31T15:07:11.400Z">
+<meta property="og:updated_time" content="2018-06-01T07:47:09.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NumPy学习笔记-1">
 <meta name="twitter:description" content="笔记1是NumPy的背景和基础知识等，主要资料来源为：Numpy v1.14 Manual，官网Quickstart tutorial和一些中文博客。">
@@ -452,8 +452,6 @@
 <p><code>any</code>函数用来测试数组中所有元素在某一方向上的“或”运算是否为<code>True</code>（<code>axis</code>默认值同上）。</p>
 <p>这两个函数的意思就是，在某一轴向上，如果所有元素都为<code>True</code>，<code>all</code>返回<code>True</code>。只要有一个元素为<code>True</code>，<code>any</code>返回<code>True</code>。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: a = np.array([[<span class="keyword">True</span>,<span class="keyword">True</span>],[<span class="keyword">False</span>,<span class="keyword">True</span>]])</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: a</span><br><span class="line">Out[<span class="number">2</span>]: </span><br><span class="line">array([[ <span class="keyword">True</span>,  <span class="keyword">True</span>],</span><br><span class="line">       [<span class="keyword">False</span>,  <span class="keyword">True</span>]])</span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: a.all()</span><br><span class="line">Out[<span class="number">3</span>]: <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: a.all(axis=<span class="number">0</span>)</span><br><span class="line">Out[<span class="number">4</span>]: array([<span class="keyword">False</span>,  <span class="keyword">True</span>])</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: a.all(axis=<span class="number">1</span>)</span><br><span class="line">Out[<span class="number">5</span>]: array([ <span class="keyword">True</span>, <span class="keyword">False</span>])</span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: b = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: c = np.array([[<span class="number">2</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">5</span>]])</span><br><span class="line"></span><br><span class="line">In [<span class="number">7</span>]: b == c</span><br><span class="line">Out[<span class="number">7</span>]: </span><br><span class="line">array([[<span class="keyword">False</span>,  <span class="keyword">True</span>],</span><br><span class="line">       [ <span class="keyword">True</span>, <span class="keyword">False</span>]])</span><br><span class="line"></span><br><span class="line">In [<span class="number">8</span>]: (b == c).any()</span><br><span class="line">Out[<span class="number">8</span>]: <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<h1 id="索引，切片与迭代"><a href="#索引，切片与迭代" class="headerlink" title="索引，切片与迭代"></a>索引，切片与迭代</h1><p>一维数组的索引，切片与迭代与Python中的<code>list</code>是完全类似的。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: (b == c).any()</span><br><span class="line">Out[<span class="number">1</span>]: <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: a = np.array([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">11</span>,<span class="number">13</span>,<span class="number">15</span>])</span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: a[<span class="number">5</span>]</span><br><span class="line">Out[<span class="number">3</span>]: <span class="number">11</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: a[::<span class="number">-1</span>]</span><br><span class="line">Out[<span class="number">4</span>]: array([<span class="number">15</span>, <span class="number">13</span>, <span class="number">11</span>,  <span class="number">9</span>,  <span class="number">7</span>,  <span class="number">5</span>,  <span class="number">3</span>,  <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: <span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">    ...:     <span class="keyword">print</span> i</span><br><span class="line">    ...:     </span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">11</span></span><br><span class="line"><span class="number">13</span></span><br><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure></p>
-<p>多维数组在每个轴方向上有一个索引，这些索引可用元祖给出（括号可省略），索引与索引之间用逗号隔开。对于二维数组，有两个轴方向<code>axis=0</code>与<code>axis=1</code>，分别表示列方向与行方向。因此，索引（m,n）就表示了列方向上第m个位置与行方向上第n个位置的元素。换句话说，就是m行n列处的那个元素。（列方向上第m个数，就是第m行）。</p>
 
       
     </div>
@@ -472,6 +470,8 @@
         <div class="post-tags">
           
             <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/NumPy/" rel="tag"># NumPy</a>
           
         </div>
       
@@ -494,8 +494,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/23/AENET的安装与基本概念/" rel="prev" title="AENET的安装及基本概念">
-                AENET的安装及基本概念 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/08/NumPy学习笔记-2/" rel="prev" title="NumPy学习笔记-2">
+                NumPy学习笔记-2 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -577,7 +577,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -599,7 +599,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -632,7 +632,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-NumPy"><span class="nav-number">1.</span> <span class="nav-text">What is NumPy?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy快速入门"><span class="nav-number">2.</span> <span class="nav-text">NumPy快速入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建ndarray"><span class="nav-number">3.</span> <span class="nav-text">创建ndarray</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#array函数"><span class="nav-number">3.1.</span> <span class="nav-text">array函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ones，zeros，empty函数"><span class="nav-number">3.2.</span> <span class="nav-text">ones，zeros，empty函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#arange，linspace函数"><span class="nav-number">3.3.</span> <span class="nav-text">arange，linspace函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本操作"><span class="nav-number">4.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Universial-Functions"><span class="nav-number">4.1.</span> <span class="nav-text">Universial Functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他常用函数"><span class="nav-number">4.2.</span> <span class="nav-text">其他常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reshape函数"><span class="nav-number">4.2.1.</span> <span class="nav-text">reshape函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#random函数"><span class="nav-number">4.2.2.</span> <span class="nav-text">random函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#all函数和any函数"><span class="nav-number">4.2.3.</span> <span class="nav-text">all函数和any函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引，切片与迭代"><span class="nav-number">5.</span> <span class="nav-text">索引，切片与迭代</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-NumPy"><span class="nav-number">1.</span> <span class="nav-text">What is NumPy?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy快速入门"><span class="nav-number">2.</span> <span class="nav-text">NumPy快速入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建ndarray"><span class="nav-number">3.</span> <span class="nav-text">创建ndarray</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#array函数"><span class="nav-number">3.1.</span> <span class="nav-text">array函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ones，zeros，empty函数"><span class="nav-number">3.2.</span> <span class="nav-text">ones，zeros，empty函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#arange，linspace函数"><span class="nav-number">3.3.</span> <span class="nav-text">arange，linspace函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本操作"><span class="nav-number">4.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Universial-Functions"><span class="nav-number">4.1.</span> <span class="nav-text">Universial Functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他常用函数"><span class="nav-number">4.2.</span> <span class="nav-text">其他常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reshape函数"><span class="nav-number">4.2.1.</span> <span class="nav-text">reshape函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#random函数"><span class="nav-number">4.2.2.</span> <span class="nav-text">random函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#all函数和any函数"><span class="nav-number">4.2.3.</span> <span class="nav-text">all函数和any函数</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
