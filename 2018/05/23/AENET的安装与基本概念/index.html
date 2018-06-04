@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="aenet介绍anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，根据电子结构计算的结果，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子动力学和">
+<meta name="description" content="aenet介绍anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，通过对第一性原理计算结果的学习，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子">
 <meta name="keywords" content="AENET,神经网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AENET的安装及基本概念">
 <meta property="og:url" content="http://yoursite.com/2018/05/23/AENET的安装与基本概念/index.html">
 <meta property="og:site_name" content="neutronar">
-<meta property="og:description" content="aenet介绍anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，根据电子结构计算的结果，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子动力学和">
+<meta property="og:description" content="aenet介绍anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，通过对第一性原理计算结果的学习，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-31T12:53:33.044Z">
+<meta property="og:updated_time" content="2018-06-04T09:43:00.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AENET的安装及基本概念">
-<meta name="twitter:description" content="aenet介绍anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，根据电子结构计算的结果，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子动力学和">
+<meta name="twitter:description" content="aenet介绍anent（Atomic Energy NETwork），是一个基于人工神经网络（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，通过对第一性原理计算结果的学习，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于大尺度原子模拟，或需要大量采样的情况，例如分子">
 
 
 
@@ -342,9 +342,9 @@
       
 
       
-        <h1 id="aenet介绍"><a href="#aenet介绍" class="headerlink" title="aenet介绍"></a>aenet介绍</h1><p><strong>anent</strong>（<a href="http://ann.atomistic.net/" target="_blank" rel="noopener">Atomic Energy NETwork</a>），是一个基于<strong>人工神经网络</strong>（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，根据电子结构计算的结果，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于<strong>大尺度原子模拟</strong>，或需要大量采样的情况，例如分子动力学和蒙特卡洛模拟。<br><a id="more"></a></p>
+        <h1 id="aenet介绍"><a href="#aenet介绍" class="headerlink" title="aenet介绍"></a>aenet介绍</h1><p><strong>anent</strong>（<a href="http://ann.atomistic.net/" target="_blank" rel="noopener">Atomic Energy NETwork</a>），是一个基于<strong>人工神经网络</strong>（Artifical neural networks，以下简称ANN）的用于创建和应用原子间作用势的软件包。aenet使用ANN，通过对第一性原理计算结果的学习，得到结构能（structural energy）的精确插值【1】。aenet产生的ANN势可以用于<strong>大尺度原子模拟</strong>，或需要大量采样的情况，例如分子动力学和蒙特卡洛模拟。<br><a id="more"></a></p>
 <blockquote>
-<p><strong>注释【1】：</strong>插值法：根据目标函数在某区间上若干个函数值，求得一个光滑、简单的插值函数，作为目标函数的近似表达式。材料的结构与能量之间一定存在一个复杂的函数关系（结构能），aenet完成的工作就是构建了一个神经网络，这个神经网络就可以看做结构能的插值函数。</p>
+<p><strong>注释【1】：</strong>插值法：根据目标函数在某区间上若干个函数值，求得一个光滑、简单的插值函数，作为目标函数的近似表达式。aenet的假设就是，材料的结构与能量之间存在一个统计分布关系，aenet完成的工作就是构建了一个神经网络，该神经网络就可以看做这个分布的插值函数。</p>
 </blockquote>
 <p>使用aenet需引用该文献：<br><strong>N. Artrith and A. Urban, Comput. Mater. Sci. 114 (2016) 135-150.</strong></p>
 <h1 id="安装aenet"><a href="#安装aenet" class="headerlink" title="安装aenet"></a>安装aenet</h1><p>aenet的核心部分由Fortran编写，因此需要先准备好gcc、gfortran编译器。</p>
@@ -353,7 +353,7 @@
 <li>LAPACK (Linear Algebra PACKage),</li>
 <li>L-BFGS-B optimization routines by Nocedal et al.</li>
 </ol>
-<p>实际上，前两个包一般的服务器上都会有（如果你在个人电脑上安装，请到<a href="http://www.netlib.org/" target="_blank" rel="noopener">官网</a>下载所需文件，并参考该博客进行安装）。</p>
+<p>前两个包一般的服务器上都会有（如果你在个人电脑上安装，请到<a href="http://www.netlib.org/" target="_blank" rel="noopener">官网</a>下载所需文件，并参考该博客进行安装）。</p>
 <p>而第三个包则集成在aenet的安装包中，使用aenet必须引用L-BFGS-B的原始论文：<br>R. H. Byrd, P. Lu and J. Nocedal, SIAM J. Sci. Stat. Comp. 16 (1995) 1190-1208.</p>
 <p>另外，aenet提供了许多Python脚本，为了使用这些脚本，需要的第三方库是NumPy与<a href="https://wiki.fysik.dtu.dk/ase/" target="_blank" rel="noopener">Atomic simulation Environment</a></p>
 <h2 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h2><p>下面以一台Ubuntu系统的个人电脑上的安装为例：<br>（注意，整个安装过程中不要更换编译器的版本）</p>
@@ -399,7 +399,7 @@
 <li>将原始的结构-能量数据编入一个训练集中（generate.x）。</li>
 <li>使用训练集对ANN进行训练。</li>
 </ol>
-<p><strong>模拟</strong>是指使用已经训练好的ANN对材料的能量进行计算模拟（aenetLib）。</p>
+<p><strong>模拟</strong>是指使用已经训练好的ANN对材料的能量进行预测。</p>
 <h2 id="ANN势的构建"><a href="#ANN势的构建" class="headerlink" title="ANN势的构建"></a>ANN势的构建</h2><p>ANN势的构建是通过对参考数据集中结构能的插值完成的。数据集中的结构格式参考本章第1节——<strong>数据集</strong>。</p>
 <p>为了在模拟计算中获得更高的泛用性，ANN势必须满足旋转、平移对称性以及交换等价原子的对称性。因此，原子的坐标必须用满足上述要求的基(basis)，符合条件的basis被称为invariant-basis。详见本章第2节——<strong>descriptor</strong>。</p>
 <p>从直角坐标到不变量坐标的转换由generate.x完成，详见本章第3节——<strong>generate.x</strong>。</p>
@@ -426,7 +426,7 @@
 <p>命令行输入：<br><code>$ generate.x generate.in &gt; generate.out</code><br>generate程序即开始运行，并将运行结果保存在<code>generate.out</code>中，同时生成训练集<code>filename.train</code>，它将作为<code>train.x</code>程序进行神经网络训练的输入文件。</p>
 <p>注：这一步不耗费太多计算资源，为了方便，使用单核足矣。</p>
 <p><strong>TiO2体系的<code>generate.in</code>文件示例</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">OUTPUT  TiO2.train  !训练数据集的输出路径及名称</span><br><span class="line"></span><br><span class="line">TYPES               !给出体系中原子种类及对应的单原子能量</span><br><span class="line">2                   </span><br><span class="line">O   -432.503149303  ! eV</span><br><span class="line">Ti -1604.604515075  ! eV</span><br><span class="line"></span><br><span class="line">SETUPS              !给出体系中各原子对应的descriptor文件路径</span><br><span class="line">O   O.fingerprint.stp</span><br><span class="line">Ti Ti.fingerprint.stp</span><br><span class="line"></span><br><span class="line">FILES               !给出数据集中每一个结构对应的路径</span><br><span class="line">7815</span><br><span class="line">./structures/0001.xsf</span><br><span class="line">./structures/0002.xsf</span><br><span class="line">...</span><br><span class="line">./structures/7815.xsf</span><br></pre></td></tr></table></figure></p>
-<p>可以看到，<code>TYPES</code>标签给出了所谓的单原子能量（$\rm atomic_energy$），经过<code>generate.x</code>的处理，原始数据集中的$\rm total_energy$将会减去$\rm N*atomic_energy$，再对原子求平均值，得到$\rm E/atom$，这个值就对应着<code>generate.out</code>中的能量。<br>如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#generate.out</span><br><span class="line"> --------------------------------------------------------------</span><br><span class="line">           Adding structures to the training set                 </span><br><span class="line"> --------------------------------------------------------------</span><br><span class="line">#  N nAtoms nTypes      E/atom      structure file (xsf)</span><br><span class="line">   1   24     2    -6.48006288E-01  ../TiO2-xsf/structure0001.xsf</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，<code>TYPES</code>标签给出了所谓的单原子能量（atomic_energy），经过<code>generate.x</code>的处理，原始数据集中的total_energy将会减去N*atomic_energy，再对原子求平均值，得到E/atom，这个值就对应着<code>generate.out</code>中的能量。<br>如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#generate.out</span><br><span class="line"> --------------------------------------------------------------</span><br><span class="line">           Adding structures to the training set                 </span><br><span class="line"> --------------------------------------------------------------</span><br><span class="line">#  N nAtoms nTypes      E/atom      structure file (xsf)</span><br><span class="line">   1   24     2    -6.48006288E-01  ../TiO2-xsf/structure0001.xsf</span><br></pre></td></tr></table></figure></p>
 <h3 id="train-x"><a href="#train-x" class="headerlink" title="train.x"></a>train.x</h3><p>生成训练集之后，就可以开始神经网络的训练了。<br>这一步需要准备的输入文件是<code>train.in</code>与<code>filename.train</code>，后者是在上一步得到的，前者需要我们手动准备。<br><code>train.in</code>文件包含了训练步骤中的关键参数，如测试集的比例，算法的选择等等。<br>下面给出TiO体系train.in文件的示例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">TRAININGSET TiO2.train !这里给出训练集的路径及名称</span><br><span class="line">TESTPERCENT  10        !测试集所占的比例，默认为10%</span><br><span class="line">!MAXENERGY   1         !能量高于1eV的样例将不被用于训练</span><br><span class="line">ITERATIONS  500        !神经网络迭代的最大次数，默认为10</span><br><span class="line"></span><br><span class="line">TIMING                 !是否输出记录了训练时间的文件</span><br><span class="line">!SAVE_ENERGIES         !是否输出每一个结构的最终预测能量</span><br><span class="line"></span><br><span class="line">METHOD                 !选择权值优化的算法，默认为bfgs。一共支持四种</span><br><span class="line">bfgs                   !L-BFGS算法，目前aenet还不支持bfgs算法的超参数调节</span><br><span class="line"></span><br><span class="line">!METHOD 2 Steepest Descent              !在线梯度下降法</span><br><span class="line">!online_sd gamma=5.0d-7 alpha=0.25d0    !gamma为学习率，alpha为动量参数</span><br><span class="line">!online_sd gamma=1.0d-8 alpha=0.25d0</span><br><span class="line"></span><br><span class="line">!METHOD 3 Extended Kalman Filter        !ekf算法</span><br><span class="line">!ekf</span><br><span class="line"></span><br><span class="line">!METHOD 4 Levenberg-Marquardt           !LM算法</span><br><span class="line">!lm batchsize=8000 learnrate=0.1d0 iter=3 conv=0.001 adjust=5.0</span><br><span class="line"></span><br><span class="line">NETWORKS               !神经网络的结构与激活函数</span><br><span class="line">! atom   network        hidden</span><br><span class="line">! types  file-name      layers  nodes:activation  !备选的激活函数有</span><br><span class="line">  O       O.10t-10t.ann    2    10:twist 10:twist !tanh,linear,sigmoid</span><br><span class="line">  Ti     Ti.10t-10t.ann    2    10:twist 10:twist</span><br></pre></td></tr></table></figure>
 <p>准备上述输入文件后，命令行输入：<br><code>$ train.x train.in &gt; train.out</code><br>即开始神经网络的训练，同时输出如下文件：</p>
