@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="利用NumPy实现原子坐标的快速变换在VASP的结构文件POSCAR中，原子的空间坐标有两种表示方式，分别是分数坐标（Direct）与直角坐标（Cart）。">
+<meta name="description" content="在VASP的结构文件POSCAR中，原子的空间坐标有两种表示方式，分别是分数坐标（Direct）与直角坐标（Cart）。 分数坐标是根据基矢定义的，在三维空间中，晶体的最小重复单元称之为原胞，而构成原胞的三个最短的向量，就是基矢。晶体中任何一个位置都可以用这三个基矢的线性组合表示出来，因此称之为分数坐标。">
 <meta name="keywords" content="Python,NumPy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用NumPy实现原子坐标变换">
 <meta property="og:url" content="http://yoursite.com/2018/06/15/利用NumPy实现原子坐标变换/index.html">
 <meta property="og:site_name" content="neutronar">
-<meta property="og:description" content="利用NumPy实现原子坐标的快速变换在VASP的结构文件POSCAR中，原子的空间坐标有两种表示方式，分别是分数坐标（Direct）与直角坐标（Cart）。">
+<meta property="og:description" content="在VASP的结构文件POSCAR中，原子的空间坐标有两种表示方式，分别是分数坐标（Direct）与直角坐标（Cart）。 分数坐标是根据基矢定义的，在三维空间中，晶体的最小重复单元称之为原胞，而构成原胞的三个最短的向量，就是基矢。晶体中任何一个位置都可以用这三个基矢的线性组合表示出来，因此称之为分数坐标。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-15T03:47:18.993Z">
+<meta property="og:updated_time" content="2018-06-15T03:50:26.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用NumPy实现原子坐标变换">
-<meta name="twitter:description" content="利用NumPy实现原子坐标的快速变换在VASP的结构文件POSCAR中，原子的空间坐标有两种表示方式，分别是分数坐标（Direct）与直角坐标（Cart）。">
+<meta name="twitter:description" content="在VASP的结构文件POSCAR中，原子的空间坐标有两种表示方式，分别是分数坐标（Direct）与直角坐标（Cart）。 分数坐标是根据基矢定义的，在三维空间中，晶体的最小重复单元称之为原胞，而构成原胞的三个最短的向量，就是基矢。晶体中任何一个位置都可以用这三个基矢的线性组合表示出来，因此称之为分数坐标。">
 
 
 
@@ -373,8 +373,8 @@
       
 
       
-        <h1 id="利用NumPy实现原子坐标的快速变换"><a href="#利用NumPy实现原子坐标的快速变换" class="headerlink" title="利用NumPy实现原子坐标的快速变换"></a>利用NumPy实现原子坐标的快速变换</h1><p>在VASP的结构文件POSCAR中，原子的空间坐标有两种表示方式，分别是<strong>分数坐标</strong>（Direct）与<strong>直角坐标</strong>（Cart）。<br> <a id="more"></a><br>直角坐标也叫笛卡尔坐标，可以理解为三维空间中基于原点的绝对坐标，这个不必多说。</p>
-<p>分数坐标则是根据基矢定义的，在三维空间中，晶体的最小重复单元称之为原胞，而构成原胞的三个最短的向量，就是基矢。晶体中任何一个位置都可以用这三个基矢的线性组合表示出来，因此称之为分数坐标。</p>
+        <p>在VASP的结构文件POSCAR中，原子的空间坐标有两种表示方式，分别是<strong>分数坐标</strong>（Direct）与<strong>直角坐标</strong>（Cart）。</p>
+<p>分数坐标是根据基矢定义的，在三维空间中，晶体的最小重复单元称之为原胞，而构成原胞的三个最短的向量，就是基矢。晶体中任何一个位置都可以用这三个基矢的线性组合表示出来，因此称之为分数坐标。<br> <a id="more"></a><br>直角坐标也叫笛卡尔坐标，可以理解为三维空间中基于原点的绝对坐标，这个不必多说。</p>
 <p>分数坐标与直角坐标之间的相互转化，可以借助矩阵运算来快速得到：</p>
 <p><strong>原理如下：</strong></p>
 <p>设$R$为基矢，$r_d$为分数坐标，$r_c$为直角坐标，则它们存在如下关系：</p>
@@ -499,17 +499,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -583,22 +574,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#利用NumPy实现原子坐标的快速变换"><span class="nav-number">1.</span> <span class="nav-text">利用NumPy实现原子坐标的快速变换</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
